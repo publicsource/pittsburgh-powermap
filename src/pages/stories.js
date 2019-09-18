@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Header, Placeholder } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -7,9 +7,21 @@ import SEO from "../components/seo"
 const StoriesPage = () => (
   <Layout>
     <SEO title="Stories" />
-    <h1>Stories</h1>
-    <p>More words here...</p>
-    <Link to="/">Go back to the homepage</Link>
+    <Header as='h1'>Stories</Header>
+    <Placeholder fluid>
+      <Placeholder.Paragraph>
+        <Placeholder.Line />
+        <Placeholder.Line />
+        <Placeholder.Line />
+        <Placeholder.Line />
+        <Placeholder.Line />
+      </Placeholder.Paragraph>
+      <Placeholder.Paragraph>
+        <Placeholder.Line />
+        <Placeholder.Line />
+        <Placeholder.Line />
+      </Placeholder.Paragraph>
+    </Placeholder>
   </Layout>
 )
 

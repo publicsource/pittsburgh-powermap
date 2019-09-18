@@ -33,12 +33,10 @@ class SearchAllNodes extends Component {
     
     const resRender = ({ Name, Type, Slug }) => (
       <List.Item>
-        <List.Content>
-          <Link to={Type === "Board" ? `/board/${Slug}` : `/person/${Slug}`}>
-            <List.Header as='a' style={{ fontWeight: 700 }}>{Name}</List.Header>
-            <List.Description>{Type}</List.Description>
-          </Link>
-        </List.Content>
+        <Link to={Type === "Board" ? `/board/${Slug}` : `/person/${Slug}`}>
+          <List.Header as='a' style={{ fontWeight: 700 }}>{Name}</List.Header>
+          <List.Description>{Type}</List.Description>
+        </Link>
       </List.Item>
     )
 
@@ -46,7 +44,6 @@ class SearchAllNodes extends Component {
       <Search
         input={{ fluid: true }}
         fluid
-        size='big'
         placeholder="Search by name..."
         loading={isLoading}
         onResultSelect={this.handleResultSelect}

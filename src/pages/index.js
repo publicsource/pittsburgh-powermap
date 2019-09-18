@@ -1,6 +1,7 @@
 import React from "react"
-import { graphql } from "gatsby"
-import { Grid } from "semantic-ui-react"
+import { graphql, Link } from "gatsby"
+import { Grid, Container, Header, Placeholder, List } from "semantic-ui-react"
+import _ from "lodash"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -10,6 +11,7 @@ const IndexPage = ({ data }) => {
 
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
+  let orderedBoards = _.orderBy(boards, [boards => boards.Name], ['asc'])
 
   let people = data.people.edges.map(e => e.node.data)
   people.forEach(p => p.Type = "Person")
@@ -21,9 +23,9 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <Grid stackable columns='equal'>
         <Grid.Row centered style={{ background: `#0d1c33` }}>
-          <section style={{ display: `flex`, flexDirection: `column`, color: `white` }}>
-            <h1>POWERMAPPING PITTSBURGH</h1>
-            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+          <section style={{ display: `flex`, flexDirection: `column` }}>
+            <Header as='h1' inverted size='huge'>POWERMAPPING PITTSBURGH</Header>
+            <p style={{ color: `white`, fontSize: `1em` }}>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
             <SearchAllNodes source={allNodes} />
           </section>
         </Grid.Row>
@@ -34,14 +36,28 @@ const IndexPage = ({ data }) => {
         </Grid.Row>
         <Grid.Row centered>
           <Grid.Column>
-            <div style={{ height: `600px`, border: `2px solid #418cff` }}>
-              City Boards (list of links)
-            </div>
+            <Header as='h2'>{_.filter(orderedBoards, { Govt_Level: 'City' }).length} City Boards</Header>
+            <List divided relaxed size='large' style={{ height: '600px', overflowY: 'scroll' }}>
+              {_.filter(orderedBoards, { Govt_Level: 'City' }).map(b => (
+                <List.Item as='a'>
+                  <Link to={`/board/${b.Slug}`}>
+                    {b.Name}
+                  </Link>
+                </List.Item>
+              ))}
+            </List>
           </Grid.Column>
           <Grid.Column>
-            <div style={{ height: `600px`, border: `2px solid #418cff` }}>
-              County Boards (list of links)
-            </div>
+            <Header as='h2'>{_.filter(orderedBoards, { Govt_Level: 'County' }).length} County Boards</Header>
+            <List divided relaxed size='large' style={{ height: '600px', overflowY: 'scroll' }}>
+              {_.filter(orderedBoards, { Govt_Level: 'County' }).map(b => (
+                <List.Item as='a'>
+                  <Link to={`/board/${b.Slug}`}>
+                    {b.Name}
+                  </Link>
+                </List.Item>
+              ))}
+            </List>
           </Grid.Column>
           <Grid.Column>
             <div style={{ height: `190px`, background: `#ddd`, marginBottom: `1em` }}>
@@ -57,14 +73,35 @@ const IndexPage = ({ data }) => {
         </Grid.Row>
         <Grid.Row centered style={{ background: `white` }}>
           <Grid.Column>
-            <div style={{ height: `400px`, border: `2px solid #ddd` }}>
-              Why we mapped power in Pittsburgh
-            </div>
+            <Container fluid >
+              <Header as='h2'>Why we mapped power in Pittsburgh</Header>
+              <Placeholder fluid>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            </Container>
           </Grid.Column>
           <Grid.Column>
-            <div style={{ height: `400px`, border: `2px solid #ddd` }}>
-              About the data
-            </div>
+            <Container fluid>
+              <Header as='h2'>About the data</Header>
+              <Placeholder fluid>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            </Container>
           </Grid.Column>
         </Grid.Row>
       </Grid>
