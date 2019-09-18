@@ -25,7 +25,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       totalCount
       edges {
         node {
-          id
           data {
             Name
             Slug
@@ -37,7 +36,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       totalCount
       edges {
         node {
-          id
           data {
             Name
             Slug

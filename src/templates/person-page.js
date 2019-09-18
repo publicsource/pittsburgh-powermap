@@ -17,7 +17,6 @@ export default ({ data }) => {
 export const query = graphql`
   query($name: String!) {
     airtable(data: {Name: {eq: $name}}) {
-      id
       data {
         Name
         Number_Board_Positions
