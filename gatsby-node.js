@@ -17,11 +17,23 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
-// Make a page for every Board in Airtable
+// Dynamically create pages from Airtable data
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
   {
-    allAirtable(filter: {table: {eq: "Boards"}}) {
+    boards: allAirtable(filter: {table: {eq: "Boards"}}) {
+      totalCount
+      edges {
+        node {
+          id
+          data {
+            Name
+            Slug
+          }
+        }
+      }
+    }
+    people: allAirtable(filter: {table: {eq: "People"}}) {
       totalCount
       edges {
         node {
@@ -36,8 +48,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   }
   `)
 
-  let boards = result.data.allAirtable.edges.map(e => e.node.data)
-
+  // Make a page for every board
+  let boards = result.data.boards.edges.map(e => e.node.data)
   boards.forEach(b => {
     createPage({
       path: `/board/${b.Slug}`,
@@ -47,6 +59,16 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       },
     })
   })
-}
 
-// TODO: Make a page for every Person in Airtable
+  // Make a page for every person
+  let people = result.data.people.edges.map(e => e.node.data)
+  people.forEach(p => {
+    createPage({
+      path: `/person/${p.Slug}`,
+      component: path.resolve("./src/templates/person-page.js"),
+      context: {
+        name: p.Name
+      },
+    })
+  })
+}
