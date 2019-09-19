@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import _ from 'lodash'
-import { Search, List } from 'semantic-ui-react'
+import { Search, List, Label, Icon } from 'semantic-ui-react'
 
 class SearchAllNodes extends Component {
   componentWillMount() {
@@ -31,11 +31,18 @@ class SearchAllNodes extends Component {
   render() {
     const { isLoading, value, results } = this.state
     
-    const resRender = ({ Name, Type, Slug }) => (
+    const resRender = ({ Name, Type, Slug, Govt_Level }) => (
       <List.Item>
         <Link to={Type === "Board" ? `/board/${Slug}` : `/person/${Slug}`}>
-          <List.Header as='a' style={{ fontWeight: 700 }}>{Name}</List.Header>
-          <List.Description>{Type}</List.Description>
+          <List.Header as='a'>
+            {Name}
+          </List.Header>
+          {Type === 'Board' ? 
+            <Label horizontal size='small' style={{ marginLeft: `5px` }}>
+              {Govt_Level} {Type}
+            </Label>
+            : <Icon name='user' style={{ marginLeft: `5px` }} color='grey' horizontal />
+          }
         </Link>
       </List.Item>
     )

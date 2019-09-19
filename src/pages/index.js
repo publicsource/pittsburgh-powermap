@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Container, Header, Placeholder, List } from "semantic-ui-react"
+import { Grid, Container, Header, Placeholder, List, Label, Icon } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
@@ -30,9 +30,7 @@ const IndexPage = ({ data }) => {
           </section>
         </Grid.Row>
         <Grid.Row centered style={{ background: `white` }}>
-          <section style={{ display: `flex`, flexDirection: `column` }}>
-            <p>Powermapping Pittsburgh does this descriptive thing that we'll put right here.</p>
-          </section>
+          <Header as='h3'>Powermapping Pittsburgh does this descriptive thing that we'll put right here.</Header>
         </Grid.Row>
         <Grid.Row centered>
           <Grid.Column>
@@ -43,6 +41,9 @@ const IndexPage = ({ data }) => {
                   <Link to={`/board/${b.Slug}`}>
                     {b.Name}
                   </Link>
+                  <Label horizontal size='small' style={{ marginLeft: `5px` }}>
+                    {b.Tags}
+                  </Label>
                 </List.Item>
               ))}
             </List>
@@ -120,6 +121,7 @@ export const query = graphql`
             Slug
             Govt_Level
             Number_of_Members
+            Tags
           }
         }
       }
