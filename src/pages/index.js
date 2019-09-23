@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Container, Header, Placeholder, List, Label, Icon } from "semantic-ui-react"
+import { Grid, Container, Header, Placeholder, List, Label } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
