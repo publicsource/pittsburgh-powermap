@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, Label, List } from "semantic-ui-react"
+import { Header, Label, List, Grid } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 

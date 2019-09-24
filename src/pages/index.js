@@ -61,14 +61,15 @@ const IndexPage = ({ data }) => {
             </List>
           </Grid.Column>
           <Grid.Column>
-            <div style={{ height: `190px`, background: `#ddd`, marginBottom: `1em` }}>
-              Notable person highlight #1
+            <Header as='h2'>{data.people.totalCount} People who serve on them</Header>
+            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
+              <Header as='h4'>NOTABLE PERSON CALLOUT</Header>
             </div>
-            <div style={{ height: `190px`, background: `#ddd`, marginBottom: `1em` }}>
-              Notable person highlight #2
+            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
+              <Header as='h4'>NOTABLE PERSON CALLOUT</Header>
             </div>
-            <div style={{ height: `190px`, background: `#ddd` }}>
-              Notable person highlight #3
+            <div style={{ height: `190px`, background: `#eee`, padding: `1em` }}>
+              <Header as='h4'>NOTABLE PERSON CALLOUT</Header>
             </div>
           </Grid.Column>
         </Grid.Row>

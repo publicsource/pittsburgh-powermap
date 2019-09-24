@@ -37,10 +37,14 @@ const Layout = ({ children }) => {
         <main>
           {children}
         </main>
-        {/* <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        {/* <footer style={{ 
+          backgroundColor: `#0d1c33`,
+          margin: `0 auto`,
+          height: `200px`,
+          color: `white`,
+          padding: `2em`,
+        }}>
+          PublicSource
         </footer> */}
       </div>
     </>
