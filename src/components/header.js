@@ -18,13 +18,13 @@ const linkStyle = {
 }
 
 const Header = ({ siteTitle }) => (
-  <header style={{ background: `#0d1c33`, marginBottom: `1rem` }}>
+  <header style={{ background: `#0d1c33` }}>
     <div style={containerStyle}>
-      <h2 style={{ margin: 0 }}>
+      <h4 style={{ margin: 0, fontWeight: 900 }}>
         <Link to="/" style={{ ...linkStyle, textTransform: `uppercase` }}>
           {siteTitle}
         </Link>
-      </h2>
+      </h4>
       <Link to="/" style={linkStyle}>
         Home
       </Link>

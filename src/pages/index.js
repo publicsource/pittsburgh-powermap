@@ -5,7 +5,6 @@ import _ from "lodash"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import SearchAllNodes from "../components/search"
 
 const IndexPage = ({ data }) => {
 
@@ -16,20 +15,11 @@ const IndexPage = ({ data }) => {
   let people = data.people.edges.map(e => e.node.data)
   people.forEach(p => p.Type = "Person")
 
-  let allNodes = [...boards, ...people]
-
   return (
     <Layout>
       <SEO title="Home" />
       <Grid stackable columns='equal'>
-        <Grid.Row centered style={{ background: `#0d1c33` }}>
-          <section style={{ display: `flex`, flexDirection: `column` }}>
-            <Header as='h1' inverted size='huge'>POWERMAPPING PITTSBURGH</Header>
-            <p style={{ color: `white`, fontSize: `1em` }}>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-            <SearchAllNodes source={allNodes} />
-          </section>
-        </Grid.Row>
-        <Grid.Row centered style={{ background: `white` }}>
+        <Grid.Row centered>
           <Header as='h3'>Powermapping Pittsburgh does this descriptive thing that we'll put right here.</Header>
         </Grid.Row>
         <Grid.Row centered>
