@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, List, Grid, Card, Label } from "semantic-ui-react"
+import { Header, List, Grid, Card, Label, Image } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -13,9 +13,16 @@ export default ({ data }) => {
     <Layout>
       <SEO title={`${person.Name}`} />
       <Grid stackable columns='equal'>
-        <Grid.Row style={{ marginLeft: `1em`, marginRight: `1em`, display: 'flex', flexDirection: 'column' }}>
-          <span style={{ color: `#418cff` }}>PERSON</span>
-          <Header as='h1' style={{ marginTop: `.2em` }}>{person.Name}</Header>
+        <Grid.Row style={{ marginLeft: `1em`, marginRight: `1em`, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ color: `#418cff` }}>PERSON</span>
+            <Header as='h1' style={{ marginTop: `.2em` }}>
+              {person.Name}
+            </Header>
+          </div>
+          <div style={{ marginLeft: `1em` }}>
+            <Image circular size='tiny' src={person.Image_Link} />
+          </div>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
@@ -68,8 +75,8 @@ export default ({ data }) => {
             </List>  
           </Grid.Column>
           <Grid.Column>
-            <div style={{ height: `300px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
-              <Header as='h4'>IMAGE</Header>
+            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
+              <Header as='h4'>CALLOUT</Header>
             </div>
             <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
               <Header as='h4'>CALLOUT</Header>
@@ -103,6 +110,7 @@ export const query = graphql`
             Birth_Date
             Day_Job
             Employer
+            Image_Link
           }
         }
       }
