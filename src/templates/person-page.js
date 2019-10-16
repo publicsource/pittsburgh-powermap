@@ -35,6 +35,8 @@ export default ({ data }) => {
             <p>{!person.Gender ? 'Unknown' : person.Gender}</p>
             <Header as='h4'>Party Affiliation</Header>
             <p>{!person.Party_Affiliation ? 'Unknown' : person.Party_Affiliation}</p>
+            <Header as='h4'>Relatives</Header>
+            <p>{!person.Related_To ? 'Unknown' : person.Related_To}</p>
           </Grid.Column>
           <Grid.Column>
             <Header as='h2'>Boards they serve on</Header>
@@ -62,16 +64,32 @@ export default ({ data }) => {
                           <span>
                             <strong>Reapplication limits:</strong> {p.node.data.Reapp_Limits}
                           </span>
+                          <span>
+                            <strong>Sponsor:</strong> {p.node.data.Sponsor}
+                          </span>
                         </div>
                       </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                      <Label>Govt_Level</Label>
-                      <Label>Tag</Label>
+                      <Label>{p.node.data.Board[0].data.Govt_Level}</Label>
+                      <Label>{p.node.data.Board[0].data.Tags}</Label>
                     </Card.Content>
                   </Card>
                 </List.Item>
               ))}
+              {!person.Other_Boards ? `` :
+                <List.Item>
+                  <Card fluid>
+                    <Card.Content>
+                      <Card.Header>
+                        Other Boards:
+                      </Card.Header>
+                      <Card.Description>
+                        {person.Other_Boards}
+                      </Card.Description>
+                    </Card.Content>
+                  </Card>
+                </List.Item>}
             </List>  
           </Grid.Column>
           <Grid.Column>
@@ -111,6 +129,7 @@ export const query = graphql`
             Day_Job
             Employer
             Image_Link
+            Other_Boards
           }
         }
       }
@@ -127,10 +146,13 @@ export const query = graphql`
             Term_Number
             Term_Length
             Reapp_Limits
+            Sponsor
             Board {
               data {
                 Name
                 Slug
+                Govt_Level
+                Tags
               }
             }
           }
