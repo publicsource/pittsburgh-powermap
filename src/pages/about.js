@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 const AboutPage = () => (
   <Layout>
     <SEO title="About" />
-    <Header as='h1'>About this project</Header>
+    <Header as='h1'>About</Header>
     <Placeholder fluid>
       <Placeholder.Paragraph>
         <Placeholder.Line />

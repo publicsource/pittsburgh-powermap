@@ -40,17 +40,17 @@ module.exports = {
         tables: [
           {
             baseId: `appqQXm5Zh9nWy2hq`,
-            tableName: `Master`,
+            tableName: `MasterNext`,
             tableLinks: [`Name_Copy`, `Board`]
           },
           {
             baseId: `appqQXm5Zh9nWy2hq`,
-            tableName: `Boards`,
-            tableLinks: [`Members_in_Master`]
+            tableName: `BoardsNext`,
+            tableLinks: [`Members_in_MasterNext`]
           },
           {
             baseId: `appqQXm5Zh9nWy2hq`,
-            tableName: `People`
+            tableName: `PeopleNext`
           }
         ]
       }

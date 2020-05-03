@@ -113,28 +113,25 @@ export const query = graphql`
   query GetPersonDetails (
     $name: String!, $contains: String!
   ) {
-    person: allAirtable(filter: {table: {eq: "People"}, data: {Name: {eq: $name}}}) {
+    person: allAirtable(filter: {table: {eq: "PeopleNext"}, data: {Name: {eq: $name}}}) {
       totalCount
       edges {
         node {
           data {
             Name
             Slug
-            Number_Board_Positions
+            Number_of_Board_Positions
             Race
             Gender
             Party_Affiliation
-            Related_To
-            Birth_Date
+            Birthdate
             Day_Job
             Employer
-            Image_Link
-            Other_Boards
           }
         }
       }
     }
-    master: allAirtable(filter: {table: {eq: "Master"}, data: {Name: {regex: $contains}}}) {
+    master: allAirtable(filter: {table: {eq: "MasterNext"}, data: {Name: {regex: $contains}}}) {
       totalCount
       edges {
         node {
@@ -143,16 +140,12 @@ export const query = graphql`
             Name
             Term_Begin_Date
             Term_End_Date
-            Term_Number
             Term_Length
-            Reapp_Limits
-            Sponsor
             Board {
               data {
                 Name
                 Slug
                 Govt_Level
-                Tags
               }
             }
           }

@@ -12,7 +12,7 @@ const HeaderWrapper = () => {
           title
         }
       } 
-      boards: allAirtable(filter: {table: {eq: "Boards"}}) {
+      boards: allAirtable(filter: {table: {eq: "BoardsNext"}}) {
         totalCount
         edges {
           node {
@@ -21,19 +21,18 @@ const HeaderWrapper = () => {
               Slug
               Govt_Level
               Number_of_Members
-              Tags
             }
           }
         }
       }
-      people: allAirtable(filter: {table: {eq: "People"}}) {
+      people: allAirtable(filter: {table: {eq: "PeopleNext"}}) {
         totalCount
         edges {
           node {
             data {
               Name
               Slug
-              Number_Board_Positions
+              Number_of_Board_Positions
             }
           }
         }

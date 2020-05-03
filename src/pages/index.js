@@ -10,7 +10,7 @@ const IndexPage = ({ data }) => {
 
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
-  let orderedBoards = _.orderBy(boards, [boards => boards.Name], ['asc'])
+  let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
 
   let people = data.people.edges.map(e => e.node.data)
   people.forEach(p => p.Type = "Person")
@@ -24,34 +24,26 @@ const IndexPage = ({ data }) => {
         </Grid.Row>
         <Grid.Row centered>
           <Grid.Column>
-            <Header as='h2'>{_.filter(orderedBoards, { Govt_Level: 'City' }).length} City Boards</Header>
+            <Header as='h2'>{_.filter(orderedBoards, { Done: true }).length} public boards (+ more coming soon)</Header>
             <List divided relaxed size='large' style={{ height: '600px', overflowY: 'scroll' }}>
-              {_.filter(orderedBoards, { Govt_Level: 'City' }).map(b => (
-                <List.Item as='a'>
-                  <Link to={`/board/${b.Slug}`}>
-                    {b.Name}
-                  </Link>
+              {orderedBoards.map(b => (
+                <List.Item>
+                  {b.Done ? 
+                    <Link to={`/board/${b.Slug}`}>{b.Name} ({b.Acronymn})</Link> 
+                    : `${b.Name} (${b.Acronymn})`
+                  }
                   <Label horizontal size='small' style={{ marginLeft: `5px` }}>
-                    {b.Tags}
+                    {b.Govt_Level}
                   </Label>
                 </List.Item>
               ))}
             </List>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h2'>{_.filter(orderedBoards, { Govt_Level: 'County' }).length} County Boards</Header>
-            <List divided relaxed size='large' style={{ height: '600px', overflowY: 'scroll' }}>
-              {_.filter(orderedBoards, { Govt_Level: 'County' }).map(b => (
-                <List.Item as='a'>
-                  <Link to={`/board/${b.Slug}`}>
-                    {b.Name}
-                  </Link>
-                </List.Item>
-              ))}
-            </List>
+            <Header as='h2' color='grey'>summary graphics tbd</Header>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h2'>{data.people.totalCount} People who serve on them</Header>
+            <Header as='h2'>{data.people.totalCount} people who serve on them</Header>
             <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
               <Header as='h4'>NOTABLE PERSON CALLOUT</Header>
             </div>
@@ -80,7 +72,7 @@ const IndexPage = ({ data }) => {
           </Grid.Column>
           <Grid.Column>
             <Container fluid>
-              <Header as='h2'>About the data</Header>
+              <Header as='h2'>About this project</Header>
               <Placeholder fluid>
                 <Placeholder.Paragraph>
                   <Placeholder.Line />
@@ -103,28 +95,29 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query AllNodesQuery {
-    boards: allAirtable(filter: {table: {eq: "Boards"}}) {
+    boards: allAirtable(filter: {table: {eq: "BoardsNext"}}) {
       totalCount
       edges {
         node {
           data {
             Name
+            Acronymn
             Slug
+            Done
             Govt_Level
             Number_of_Members
-            Tags
           }
         }
       }
     }
-    people: allAirtable(filter: {table: {eq: "People"}}) {
+    people: allAirtable(filter: {table: {eq: "PeopleNext"}}) {
       totalCount
       edges {
         node {
           data {
             Name
             Slug
-            Number_Board_Positions
+            Number_of_Board_Positions
           }
         }
       }

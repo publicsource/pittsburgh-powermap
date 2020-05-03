@@ -29,10 +29,7 @@ const Header = ({ siteTitle }) => (
         Home
       </Link>
       <Link to="/about" style={linkStyle}>
-        About this project
-      </Link>
-      <Link to="/methods" style={linkStyle}>
-        Data and methods
+        About
       </Link>
       <Link to="/stories" style={linkStyle}>
         Stories
