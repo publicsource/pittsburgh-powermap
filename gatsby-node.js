@@ -65,8 +65,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: `/person/${p.Slug}`,
       component: path.resolve("./src/templates/person-page.js"),
       context: {
-        name: p.Name,
-        contains: `/${p.Name}/`
+        name: p.Name
       },
     })
   })

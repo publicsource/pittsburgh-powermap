@@ -6,11 +6,11 @@
        Fonts
 --------------------*/
 
-@fontName          : 'Lato';
+@fontName          : 'Puritan';
 @fontSmoothing     : antialiased;
 
-@headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : @fontName, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@pageFont          : @fontName, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;
@@ -18,7 +18,7 @@
 @googleSubset      : 'latin';
 
 @googleProtocol    : 'https://';
-@googleFontRequest : '@{googleFontName}:@{googleFontSizes}&subset=@{googleSubset}';
+@googleFontRequest : '@googleFontName:@{googleFontSizes}&subset=@{googleSubset}';
 
 
 @bold              : bold;

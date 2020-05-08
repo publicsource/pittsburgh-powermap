@@ -1,13 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, List, Grid, Card, Label, Image } from "semantic-ui-react"
+import { Header, Grid, Card } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 export default ({ data }) => {
   let person = data.person.edges[0].node.data
-  let positions = data.master.edges
+  console.log(person)
 
   return (
     <Layout>
@@ -20,77 +20,30 @@ export default ({ data }) => {
               {person.Name}
             </Header>
           </div>
-          <div style={{ marginLeft: `1em` }}>
-            <Image circular size='tiny' src={person.Image_Link} />
-          </div>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
             <Header as='h2'>Who they are</Header>
-            <Header as='h4'>Day Job</Header>
-            <p>{!person.Day_Job ? 'Unknown' : `${person.Day_Job} at ${person.Employer}`}</p>
-            <Header as='h4'>Race</Header>
-            <p>{!person.Race ? 'Unknown' : person.Race}</p>
-            <Header as='h4'>Gender</Header>
-            <p>{!person.Gender ? 'Unknown' : person.Gender}</p>
-            <Header as='h4'>Party Affiliation</Header>
+            <Header as='h4'>Date of birth</Header>
+            <p>{person.Birthdate}</p>
+            <Header as='h4'>Day job</Header>
+            <p>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</p>
+            <Header as='h4'>Party affiliation</Header>
             <p>{!person.Party_Affiliation ? 'Unknown' : person.Party_Affiliation}</p>
-            <Header as='h4'>Relatives</Header>
-            <p>{!person.Related_To ? 'Unknown' : person.Related_To}</p>
+            <Header as='h4'>Education</Header>
+            <p>{`${person.High_School}, ${person.College}, ${person.College2}, ${person.College3}`}</p>
           </Grid.Column>
           <Grid.Column>
             <Header as='h2'>Boards they serve on</Header>
-            <List relaxed>
-              {positions.map(p => (
-                <List.Item>
-                  <Card fluid>
-                    <Card.Content>
-                      <Card.Header>
-                        <Link to={`/board/${p.node.data.Board[0].data.Slug}`}>
-                          {p.node.data.Board[0].data.Name}
-                        </Link>
-                      </Card.Header>
-                      <Card.Meta>
-                        Since {p.node.data.Term_Begin_Date}
-                      </Card.Meta>
-                      <Card.Description>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                          <span>
-                            <strong>Term number:</strong> {p.node.data.Term_Number}
-                          </span>
-                          <span>
-                            <strong>Term end:</strong> {p.node.data.Term_End_Date}
-                          </span>
-                          <span>
-                            <strong>Reapplication limits:</strong> {p.node.data.Reapp_Limits}
-                          </span>
-                          <span>
-                            <strong>Sponsor:</strong> {p.node.data.Sponsor}
-                          </span>
-                        </div>
-                      </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <Label>{p.node.data.Board[0].data.Govt_Level}</Label>
-                      <Label>{p.node.data.Board[0].data.Tags}</Label>
-                    </Card.Content>
-                  </Card>
-                </List.Item>
-              ))}
-              {!person.Other_Boards ? `` :
-                <List.Item>
-                  <Card fluid>
-                    <Card.Content>
-                      <Card.Header>
-                        Other Boards:
-                      </Card.Header>
-                      <Card.Description>
-                        {person.Other_Boards}
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
-                </List.Item>}
-            </List>  
+            {person.Positions.map(p => (
+              <Card
+                fluid
+                href={`/board/${p.data.Board[0].data.Slug}`}
+                header={p.data.Board[0].data.Name}
+                meta={p.data.Office}
+                description={`${p.data.Term_Number} terms: ${p.data.Term_Begin_Date} through ${p.data.Term_End_Date}`}
+              />
+            ))}
           </Grid.Column>
           <Grid.Column>
             <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
@@ -111,7 +64,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   query GetPersonDetails (
-    $name: String!, $contains: String!
+    $name: String!
   ) {
     person: allAirtable(filter: {table: {eq: "People"}, data: {Name: {eq: $name}}}) {
       totalCount
@@ -120,39 +73,29 @@ export const query = graphql`
           data {
             Name
             Slug
-            Number_Board_Positions
-            Race
-            Gender
-            Party_Affiliation
-            Related_To
-            Birth_Date
+            Number_of_Positions
+            Birthdate
+            Residence
             Day_Job
             Employer
-            Image_Link
-            Other_Boards
-          }
-        }
-      }
-    }
-    master: allAirtable(filter: {table: {eq: "Master"}, data: {Name: {regex: $contains}}}) {
-      totalCount
-      edges {
-        node {
-          id
-          data {
-            Name
-            Term_Begin_Date
-            Term_End_Date
-            Term_Number
-            Term_Length
-            Reapp_Limits
-            Sponsor
-            Board {
+            Party_Affiliation
+            High_School
+            College
+            College2
+            College3
+            Positions {
               data {
                 Name
-                Slug
-                Govt_Level
-                Tags
+                Office
+                Term_Begin_Date
+                Term_End_Date
+                Term_Number
+                Board {
+                  data {
+                    Name
+                    Slug
+                  }
+                }
               }
             }
           }
