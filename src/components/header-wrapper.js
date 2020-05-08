@@ -12,7 +12,7 @@ const HeaderWrapper = () => {
           title
         }
       } 
-      boards: allAirtable(filter: {table: {eq: "BoardsNext"}}) {
+      boards: allAirtable(filter: {table: {eq: "Boards"}}) {
         totalCount
         edges {
           node {
@@ -25,14 +25,14 @@ const HeaderWrapper = () => {
           }
         }
       }
-      people: allAirtable(filter: {table: {eq: "PeopleNext"}}) {
+      people: allAirtable(filter: {table: {eq: "People"}}) {
         totalCount
         edges {
           node {
             data {
               Name
               Slug
-              Number_of_Board_Positions
+              Number_of_Positions
             }
           }
         }
@@ -51,10 +51,9 @@ const HeaderWrapper = () => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <section style={{ display: `flex`, flexDirection: `column`, alignContent: 'center', alignItems: 'center', flexWrap: `wrap`, background: `#0d1c33`, padding: `1em`, marginBottom: `2em` }}>
-        <h1 style={{ fontWeight: 900, color: `white` }}>POWERMAPPING PITTSBURGH</h1>
-        <p style={{ color: `white`, fontSize: `1em` }}>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-        <div style={{ minWidth: `300px` }}>
+      <section style={{ display: `flex`, flexDirection: `column`, alignContent: 'center', alignItems: 'center', flexWrap: `wrap`, background: `#0d1c33`, padding: `3em 1em`, marginBottom: `2em` }}>
+        <h2 style={{ fontWeight: 900, color: `white` }}>Board Explorer: Understanding Pittsburgh's unelected power structure</h2>
+        <div style={{ minWidth: `600px` }}>
           <SearchAllNodes source={allNodes} />
         </div>
       </section>

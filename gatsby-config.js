@@ -5,8 +5,8 @@ require("dotenv").config({
 module.exports = {
   pathPrefix: "/pittsburgh-powermap",
   siteMetadata: {
-    title: `Powermapping Pittsburgh`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Board Explorer`,
+    description: `Understanding Pittsburgh's unelected power structure`,
     author: `@gatsbyjs`,
   },
   plugins: [
@@ -40,17 +40,23 @@ module.exports = {
         tables: [
           {
             baseId: `appqQXm5Zh9nWy2hq`,
-            tableName: `MasterNext`,
-            tableLinks: [`Name_Copy`, `Board`]
+            tableName: `Positions`,
+            tableLinks: [`Person`, `Board`]
           },
           {
             baseId: `appqQXm5Zh9nWy2hq`,
-            tableName: `BoardsNext`,
-            tableLinks: [`Members_in_MasterNext`]
+            tableName: `Boards`,
+            tableLinks: [`Positions`]
           },
           {
             baseId: `appqQXm5Zh9nWy2hq`,
-            tableName: `PeopleNext`
+            tableName: `People`,
+            tableLinks: [`Positions`]
+          },
+          {
+            baseId: `appqQXm5Zh9nWy2hq`,
+            tableName: `Callouts`,
+            tableLinks: [`Person`, `Boards`]
           }
         ]
       }

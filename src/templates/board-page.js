@@ -25,12 +25,14 @@ export default ({ data }) => {
             <p>{board.Description}</p>
             <Header as='h2'>When it meets</Header>
             <p>{board.Meeting_Time}</p>
+            <Header as='h2'>Learn more</Header>
+            <a href={board.Website} target="_blank" rel="noopener noreferrer">{board.Website}</a>
           </Grid.Column>
           <Grid.Column>
             <Header as='h2'>{board.Number_of_Members} members</Header>
             <List relaxed divided>
-              {board.Members_in_MasterNext.map(m => (
-                m.data.Name_Copy.map(n => (
+              {board.Positions.map(m => (
+                m.data.Person.map(n => (
                   <List.Item>
                     <List.Header>
                       <Link to={`/person/${n.data.Slug}`}>
@@ -65,13 +67,14 @@ export const query = graphql`
         Govt_Level
         Description
         Meeting_Time
+        Website
         Number_of_Members
-        Members_in_MasterNext {
+        Positions {
           data {
-            Name_Copy {
+            Person {
               data {
-                Slug
                 Name
+                Slug
               }
             }
           }

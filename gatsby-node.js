@@ -21,7 +21,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
   {
-    boards: allAirtable(filter: {table: {eq: "BoardsNext"}}) {
+    boards: allAirtable(filter: {table: {eq: "Boards"}}) {
       totalCount
       edges {
         node {
@@ -32,7 +32,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
       }
     }
-    people: allAirtable(filter: {table: {eq: "PeopleNext"}}) {
+    people: allAirtable(filter: {table: {eq: "People"}}) {
       totalCount
       edges {
         node {
@@ -65,8 +65,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: `/person/${p.Slug}`,
       component: path.resolve("./src/templates/person-page.js"),
       context: {
-        name: p.Name,
-        contains: `/${p.Name}/`
+        name: p.Name
       },
     })
   })

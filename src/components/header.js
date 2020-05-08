@@ -7,8 +7,9 @@ const containerStyle = {
   padding: `1.45rem 1.0875rem`, 
   display: `flex`,
   alignItems: `center`,
+  justifyContent: `space-between`,
   flexWrap: `wrap`,
-  border: '3px solid white',
+  borderBottom: '3px solid white',
 }
 
 const linkStyle = {
@@ -20,26 +21,30 @@ const linkStyle = {
 const Header = ({ siteTitle }) => (
   <header style={{ background: `#0d1c33` }}>
     <div style={containerStyle}>
-      <h4 style={{ margin: 0, fontWeight: 900 }}>
-        <Link to="/" style={{ ...linkStyle, textTransform: `uppercase` }}>
-          {siteTitle}
+      <div>
+        <h4 style={{ margin: 0, fontWeight: 900 }}>
+          <Link to="/" style={{ ...linkStyle, textTransform: `uppercase` }}>
+            {siteTitle}
+          </Link>
+        </h4>
+        <Link to="/" style={linkStyle}>
+          Home
         </Link>
-      </h4>
-      <Link to="/" style={linkStyle}>
-        Home
-      </Link>
-      <Link to="/about" style={linkStyle}>
-        About
-      </Link>
-      <Link to="/stories" style={linkStyle}>
-        Stories
-      </Link>
-      <Link to="/contact" style={linkStyle}>
-        Contact
-      </Link>
-      <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 700 }}>
-        PUBLICSOURCE
-      </a>
+        <Link to="/about" style={linkStyle}>
+          About
+        </Link>
+        <Link to="/stories" style={linkStyle}>
+          Stories
+        </Link>
+        <Link to="/contact" style={linkStyle}>
+          Contact
+        </Link>
+      </div>
+      <div>
+        <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 700 }}>
+          PUBLICSOURCE
+        </a>
+      </div>
     </div>
   </header>
 )
