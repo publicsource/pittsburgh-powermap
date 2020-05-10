@@ -1,6 +1,7 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { Header, Grid, Card } from "semantic-ui-react"
+import _ from "lodash"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,6 +9,9 @@ import SEO from "../components/seo"
 export default ({ data }) => {
   let person = data.person.edges[0].node.data
   console.log(person)
+
+  let schools = []
+  schools.push(person.High_School, person.College, person.College2, person.College3)
 
   return (
     <Layout>
@@ -24,14 +28,14 @@ export default ({ data }) => {
         <Grid.Row>
           <Grid.Column>
             <Header as='h2'>Who they are</Header>
-            <Header as='h4'>Date of birth</Header>
-            <p>{person.Birthdate}</p>
+            <Header as='h4'>Age</Header>
+            <p>{person.Age} years old</p>
             <Header as='h4'>Day job</Header>
             <p>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</p>
             <Header as='h4'>Party affiliation</Header>
             <p>{!person.Party_Affiliation ? 'Unknown' : person.Party_Affiliation}</p>
             <Header as='h4'>Education</Header>
-            <p>{`${person.High_School}, ${person.College}, ${person.College2}, ${person.College3}`}</p>
+            <p>{_.compact(schools).join(', ')}</p>
           </Grid.Column>
           <Grid.Column>
             <Header as='h2'>Boards they serve on</Header>
@@ -41,7 +45,7 @@ export default ({ data }) => {
                 href={`/board/${p.data.Board[0].data.Slug}`}
                 header={p.data.Board[0].data.Name}
                 meta={p.data.Office}
-                description={`${p.data.Term_Number} terms: ${p.data.Term_Begin_Date} through ${p.data.Term_End_Date}`}
+                description={`${p.data.Term_Length}-year term: ${p.data.Term_Begin_Date} through ${p.data.Term_End_Date}`}
               />
             ))}
           </Grid.Column>
@@ -74,7 +78,7 @@ export const query = graphql`
             Name
             Slug
             Number_of_Positions
-            Birthdate
+            Age
             Residence
             Day_Job
             Employer
@@ -89,7 +93,7 @@ export const query = graphql`
                 Office
                 Term_Begin_Date
                 Term_End_Date
-                Term_Number
+                Term_Length
                 Board {
                   data {
                     Name

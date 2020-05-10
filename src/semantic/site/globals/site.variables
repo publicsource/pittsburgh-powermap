@@ -6,14 +6,14 @@
        Fonts
 --------------------*/
 
-@fontName          : 'Puritan';
+@fontName          : 'Open Sans';
 @fontSmoothing     : antialiased;
 
 @headerFont        : @fontName, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 @pageFont          : @fontName, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 @googleFontName    : @fontName;
-@importGoogleFonts : true;
+@importGoogleFonts : false;
 @googleFontSizes   : '400,700,400italic,700italic';
 @googleSubset      : 'latin';
 

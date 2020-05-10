@@ -1,5 +1,5 @@
 import React from "react"
-import { Header, Placeholder } from "semantic-ui-react"
+import { Header } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
