@@ -44,8 +44,7 @@ export default ({ data }) => {
                 fluid
                 href={`/board/${p.data.Board[0].data.Slug}`}
                 header={p.data.Board[0].data.Name}
-                meta={p.data.Office}
-                description={`${p.data.Term_Length}-year term: ${p.data.Term_Begin_Date} through ${p.data.Term_End_Date}`}
+                description={`${p.data.Office}, ${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
               />
             ))}
           </Grid.Column>

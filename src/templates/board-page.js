@@ -39,7 +39,7 @@ export default ({ data }) => {
                         {n.data.Name}
                       </Link>
                     </List.Header>
-                    {n.data.Positions[0].data.Office}. Joined in {n.data.Positions[0].data.Term_Begin_Date.slice(n.data.Positions[0].data.Term_Begin_Date.length - 4)}
+                    {n.data.Positions[0].data.Office}, joined {n.data.Positions[0].data.Term_Begin_Date}
                   </List.Item>
                 ))
               ))}
