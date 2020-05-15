@@ -37,15 +37,15 @@ const IndexPage = ({ data }) => {
                     <Link to={`/board/${b.Slug}`}>{b.Name}</Link> 
                     : `${b.Name}`
                   }
-                  <Label horizontal size='small' style={{ marginLeft: `5px` }}>
-                    {b.Govt_Level}
+                  <Label horizontal color={b.Govt_Level == 'City' ? `orange` : `yellow`} style={{ marginLeft: `6px` }}>
+                    {b.Govt_Level.toUpperCase()}
                   </Label>
                 </List.Item>
               ))}
             </List>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h2'>{data.people.totalCount} people serve on these boards; here's a preview of who you should know</Header>
+            <Header as='h2'>{data.people.totalCount} people serve on these boards; here's who you should know</Header>
             {orderedCallouts.map(c => (
               <Card
                 fluid
