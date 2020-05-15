@@ -16,7 +16,7 @@ const linkStyle = {
   color: `white`,
   textDecoration: `none`,
   marginRight: `1em`,
-  fontFamily: `Open Sans`,
+  fontFamily: `Mallory`,
 }
 
 const Header = ({ siteTitle }) => (
@@ -39,7 +39,7 @@ const Header = ({ siteTitle }) => (
       </Link>
     </div>
     <div>
-      <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 700, fontFamily: `Open Sans` }}>
+      <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 700, fontFamily: `Mallory` }}>
         PUBLICSOURCE
       </a>
     </div>
