@@ -138,9 +138,9 @@
        Links
 --------------------*/
 
-@linkColor           : #418cff;
+@linkColor           : #000;
 @linkUnderline       : none;
-@linkHoverColor      : darken(saturate(@linkColor, 20), 15, relative);
+@linkHoverColor      : #418cff;
 @linkHoverUnderline  : @linkUnderline;
 
 /*-------------------

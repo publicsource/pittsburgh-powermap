@@ -25,7 +25,11 @@ const IndexPage = ({ data }) => {
       <Grid stackable columns='equal'>
         <Grid.Row centered>
           <Grid.Column>
-            <Header as='h2'>First stop: 16 authorities that influence our economy</Header>
+            <Header 
+              as='h2'
+              style={{ borderBottom: `5px solid #418cff` }}>
+              First stop: 16 authorities that influence our economy
+            </Header>
             <List divided relaxed size='large'>
               {orderedBoards.map(b => (
                 <List.Item>
@@ -41,6 +45,7 @@ const IndexPage = ({ data }) => {
             </List>
           </Grid.Column>
           <Grid.Column>
+            <Header as='h2'>{data.people.totalCount} people serve on these boards; here's a preview of who you should know</Header>
             {orderedCallouts.map(c => (
               <Card
                 fluid
