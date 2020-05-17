@@ -13,24 +13,18 @@
 /* Card */
 @fontFamily: @pageFont;
 @display: flex;
-@background: @white;
+@background: #F5F5F5;
 @borderRadius: @defaultBorderRadius;
 @margin: 1em 0em;
 @minHeight: 0px;
 @padding: 0em;
 @width: 290px;
-@borderWidth: 1px;
-@borderShadow: 0px 0px 0px @borderWidth @solidBorderColor;
-@boxShadow:
-  @shadowBoxShadow,
-  @borderShadow
-;
-@border: none;
+@borderWidth: 2px;
+@borderShadow: 0px;
+@boxShadow: 0px;
+@borderLeft: 5px solid #418cff;
 @zIndex: '';
-@transition:
-  box-shadow @defaultDuration @defaultEasing,
-  transform @defaultDuration @defaultEasing
-;
+@transition: none;
 
 /* Card Group */
 @horizontalSpacing: 1em;
@@ -84,7 +78,7 @@
 /* Icons */
 @actionOpacity: 0.75;
 @actionHoverOpacity: 1;
-@actionTransition: color @defaultDuration @defaultEasing;
+@actionTransition: none;
 
 @starColor: #FFB70A;
 @starActiveColor: #FFE623;
@@ -95,13 +89,13 @@
 /* Links */
 @contentLinkColor: '';
 @contentLinkHoverColor: '';
-@contentLinkTransition: color @defaultDuration @defaultEasing;
+@contentLinkTransition: none;
 
 @headerLinkColor: @headerColor;
 @headerLinkHoverColor: @linkHoverColor;
 
-@metaLinkColor: @lightTextColor;
-@metaLinkHoverColor: @textColor;
+@metaLinkColor: #418cff;
+@metaLinkHoverColor: #fff;
 
 /* Description */
 @descriptionDistance: 0.5em;
@@ -133,7 +127,7 @@
 @extraPadding: 0.75em 1em;
 @extraBoxShadow: none;
 @extraColor: @lightTextColor;
-@extraTransition: color @defaultDuration @defaultEasing;
+@extraTransition: none;
 
 /* Extra Links */
 @extraLinkColor: @unselectedTextColor;

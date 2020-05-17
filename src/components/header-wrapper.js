@@ -12,12 +12,13 @@ const HeaderWrapper = () => {
           title
         }
       } 
-      boards: allAirtable(filter: {table: {eq: "Boards"}}) {
+      boards: allAirtable(filter: {table: {eq: "Boards"}, data: {Done: {eq: true}}}) {
         totalCount
         edges {
           node {
             data {
               Name
+              Acronymn
               Slug
               Govt_Level
               Number_of_Members
@@ -25,7 +26,7 @@ const HeaderWrapper = () => {
           }
         }
       }
-      people: allAirtable(filter: {table: {eq: "People"}}) {
+      people: allAirtable(filter: {table: {eq: "People"}, data: {Done: {eq: true}}}) {
         totalCount
         edges {
           node {
@@ -51,9 +52,10 @@ const HeaderWrapper = () => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <section style={{ display: `flex`, flexDirection: `column`, alignContent: 'center', alignItems: 'center', flexWrap: `wrap`, background: `#0d1c33`, padding: `3em 1em`, marginBottom: `2em` }}>
-        <h2 style={{ fontWeight: 900, color: `white` }}>Board Explorer: Understanding Pittsburgh's unelected power structure</h2>
-        <div style={{ minWidth: `600px` }}>
+      <section style={{ display: `flex`, flexDirection: `column`, alignContent: 'center', alignItems: 'center', flexWrap: `wrap`, background: `#0d1c33`, padding: `3em 1em` }}>
+        <h1 style={{ color: `white`, marginBottom: 0 }}>BOARD EXPLORER</h1>
+        <h2 style={{ color: `white`, marginTop: 0, textAlign: `center` }}>Understanding Pittsburgh's unelected power structure</h2>
+        <div style={{ width: `80%` }}>
           <SearchAllNodes source={allNodes} />
         </div>
       </section>

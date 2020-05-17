@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, Label, List, Grid } from "semantic-ui-react"
+import { Header, Label, List, Grid, Breadcrumb } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -13,11 +13,21 @@ export default ({ data }) => {
       <SEO title={`${board.Name}`} />
       <Grid stackable columns='equal'>
         <Grid.Row style={{ marginLeft: `1em`, display: 'flex', flexDirection: 'column' }}>
-          <span style={{ color: `#418cff` }}>BOARD</span>
-          <Header as='h1' style={{ marginTop: `.2em` }}>{board.Name}</Header>
-          <div>
-            <Label>{board.Govt_Level}</Label>
-          </div>
+        <Breadcrumb>
+          <Breadcrumb.Section>
+            <Link to='/' style={{ color: `#418cff` }}>Home</Link>
+          </Breadcrumb.Section>
+          <Breadcrumb.Divider />
+          <Breadcrumb.Section active>Board</Breadcrumb.Section>
+        </Breadcrumb>
+          <Header as='h1'>{board.Name} ({board.Acronymn})</Header>
+          <Header.Subheader>
+            {board.Govt_Level.map((g, i) => 
+              <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`} style={{ marginRight: `6px` }}>
+                {g.toUpperCase()}
+              </Label>
+            )}
+          </Header.Subheader>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
@@ -29,8 +39,8 @@ export default ({ data }) => {
             <a href={board.Website} target="_blank" rel="noopener noreferrer">{board.Website}</a>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h2'>{board.Number_of_Members} members</Header>
-            <List relaxed divided>
+            <Header as='h2' style={{ borderBottom: `5px solid #418cff`}}>{board.Number_of_Members} members</Header>
+            <List relaxed divided size='large'>
               {board.Positions.map(m => (
                 m.data.Person.map(n => (
                   <List.Item>
@@ -39,7 +49,9 @@ export default ({ data }) => {
                         {n.data.Name}
                       </Link>
                     </List.Header>
-                    {n.data.Positions[0].data.Office}, joined {n.data.Positions[0].data.Term_Begin_Date}
+                    <List.Description>
+                      {n.data.Positions[0].data.Office}, joined {n.data.Positions[0].data.Term_Begin_Date}
+                    </List.Description>
                   </List.Item>
                 ))
               ))}
@@ -65,6 +77,7 @@ export const query = graphql`
       id
       data {
         Name
+        Acronymn
         Govt_Level
         Description
         Meeting_Time

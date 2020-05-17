@@ -21,25 +21,27 @@ const linkStyle = {
 
 const Header = ({ siteTitle }) => (
   <header style={containerStyle}>
-    <div>
+    <div style={{ display: `flex`, flexDirection: `row`, flexWrap: `wrap` }}>
       <Link to="/" style={{ ...linkStyle, fontWeight: 700, textTransform: `uppercase` }}>
         {siteTitle}
       </Link>
-      <Link to="/" style={linkStyle}>
-        Home
-      </Link>
-      <Link to="/about" style={linkStyle}>
-        About
-      </Link>
-      <Link to="/stories" style={linkStyle}>
-        Stories
-      </Link>
-      <Link to="/contact" style={linkStyle}>
-        Contact
-      </Link>
+      <div>
+        <Link to="/" style={linkStyle}>
+          Home
+        </Link>
+        <Link to="/about" style={linkStyle}>
+          About
+        </Link>
+        <Link to="/stories" style={linkStyle}>
+          Stories
+        </Link>
+        <Link to="/contact" style={linkStyle}>
+          Contact
+        </Link>
+      </div>
     </div>
     <div>
-      <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 700, fontFamily: `Mallory` }}>
+      <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 800, fontFamily: `Mallory` }}>
         PUBLICSOURCE
       </a>
     </div>
