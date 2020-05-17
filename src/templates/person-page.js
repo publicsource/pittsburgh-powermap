@@ -1,6 +1,6 @@
 import React from "react"
-import { graphql } from "gatsby"
-import { Header, Grid, Card } from "semantic-ui-react"
+import { graphql, Link } from "gatsby"
+import { Header, Grid, Card, Breadcrumb } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
@@ -17,23 +17,27 @@ export default ({ data }) => {
     <Layout>
       <SEO title={`${person.Name}`} />
       <Grid stackable columns='equal'>
-        <Grid.Row style={{ marginLeft: `1em`, marginRight: `1em`, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ color: `#418cff` }}>PERSON</span>
-            <Header as='h1' style={{ marginTop: `.2em` }}>
-              {person.Name}
-            </Header>
-          </div>
+        <Grid.Row style={{ marginLeft: `1em`, display: 'flex', flexDirection: 'column' }}>
+          <Breadcrumb>
+            <Breadcrumb.Section>
+              <Link to='/' style={{ color: `#418cff` }}>Home</Link>
+            </Breadcrumb.Section>
+            <Breadcrumb.Divider />
+            <Breadcrumb.Section active>Person</Breadcrumb.Section>
+          </Breadcrumb>
+          <Header as='h1'>{person.Name}</Header>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
             <Header as='h2'>Who they are</Header>
             <Header as='h4'>Age</Header>
             <p>{person.Age} years old</p>
-            <Header as='h4'>Day job</Header>
-            <p>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</p>
             <Header as='h4'>Party affiliation</Header>
             <p>{!person.Party_Affiliation ? 'Unknown' : person.Party_Affiliation}</p>
+            <Header as='h4'>Residence</Header>
+            <p>{!person.Residence ? 'Unknown' : person.Residence}</p>
+            <Header as='h4'>Day job</Header>
+            <p>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</p>
             <Header as='h4'>Education</Header>
             <p>{_.compact(schools).join(', ')}</p>
           </Grid.Column>
@@ -45,6 +49,7 @@ export default ({ data }) => {
                 href={`/board/${p.data.Board[0].data.Slug}`}
                 header={p.data.Board[0].data.Name}
                 description={`${p.data.Office}, ${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
+                style={{ borderLeft: `5px solid #418cff` }}
               />
             ))}
           </Grid.Column>

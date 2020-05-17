@@ -11,6 +11,7 @@ const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
+  console.log(orderedBoards)
   
   let people = data.people.edges.map(e => e.node.data)
   people.forEach(p => p.Type = "Person")
@@ -25,9 +26,7 @@ const IndexPage = ({ data }) => {
       <Grid stackable columns='equal'>
         <Grid.Row centered>
           <Grid.Column>
-            <Header 
-              as='h2'
-              style={{ borderBottom: `5px solid #418cff` }}>
+            <Header as='h2' style={{ borderBottom: `5px solid #418cff` }}>
               First stop: 16 authorities that influence our economy
             </Header>
             <List divided relaxed size='large'>
@@ -37,15 +36,21 @@ const IndexPage = ({ data }) => {
                     <Link to={`/board/${b.Slug}`}>{b.Name}</Link> 
                     : `${b.Name}`
                   }
-                  <Label horizontal color={b.Govt_Level == 'City' ? `orange` : `yellow`} style={{ marginLeft: `6px` }}>
-                    {b.Govt_Level.toUpperCase()}
-                  </Label>
+                  {b.Govt_Level.map((g, i) => 
+                    <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`} style={{ marginLeft: `6px` }}>
+                      {g.toUpperCase()}
+                    </Label>
+                  )}
                 </List.Item>
               ))}
             </List>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h2'>{data.people.totalCount} people serve on these boards; here's who you should know</Header>
+            <div style={{ background: `#f5f5f5`, height: `100%`, padding: 10 }}>
+              Spaceholder for graphics
+            </div>
+          </Grid.Column>
+          <Grid.Column>
             {orderedCallouts.map(c => (
               <Card
                 fluid
@@ -54,26 +59,27 @@ const IndexPage = ({ data }) => {
                 header={c.Person[0].data.Name}
                 meta={c.Boards.map((b, i) => (
                   <span>
-                    {i > 0 ? `and ` : ``}
-                    <Link key={i} to={`/board/${b.data.Slug}`}>{b.data.Name}</Link>
+                    {i > 0 ? `& ` : ``}
+                    <Link key={i} to={`/board/${b.data.Slug}`}>
+                      {b.data.Name}
+                    </Link>
                   </span>
                 ))}
                 description={c.Description}
+                style={{ borderLeft: `5px solid #418cff` }}
               />
             ))}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered style={{ background: `white` }}>
           <Grid.Column>
-            <Container fluid >
-              <Header as='h2'>About this project</Header>
-              <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
-              <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often decide what does and doesn’t get built, who gets contracts and grants, what rates and fees we pay for everything from bus rides to water, and more.</p>
-              <p>Now, as the region copes with the effects of the coronavirus pandemic, the operations of those boards are likely to affect our lives and futures more than ever. Already, boards are switching gears from managing growth to addressing an economic emergency. It’s time we got to know them better.</p>
-              <p>PublicSource’s new Board Explorer sheds light on the boards and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
-              <p>We’ll start with 16 boards involved — directly or indirectly — in the region’s economy. From Alcosan, which is rebuilding the sewer system, to the Zoning Board of Adjustment, which approves or denies construction proposals, these boards affect jobs, the built environment, housing, transportation, utilities, cultural assets and more.</p>
-              <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us.</p>
-            </Container>
+            <Header as='h2' style={{ borderBottom: `5px solid #418cff` }}>About this project</Header>
+            <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
+            <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often decide what does and doesn’t get built, who gets contracts and grants, what rates and fees we pay for everything from bus rides to water, and more.</p>
+            <p>Now, as the region copes with the effects of the coronavirus pandemic, the operations of those boards are likely to affect our lives and futures more than ever. Already, boards are switching gears from managing growth to addressing an economic emergency. It’s time we got to know them better.</p>
+            <p>PublicSource’s new Board Explorer sheds light on the boards and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
+            <p>We’ll start with 16 boards involved — directly or indirectly — in the region’s economy. From Alcosan, which is rebuilding the sewer system, to the Zoning Board of Adjustment, which approves or denies construction proposals, these boards affect jobs, the built environment, housing, transportation, utilities, cultural assets and more.</p>
+            <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us.</p>
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -19,27 +19,27 @@ class SearchAllNodes extends Component {
       if (this.state.value.length < 1) return this.resetComponent()
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.Name)
+      const isMatch = result => re.test(result.Name.concat(result.Acronymn))
 
       this.setState({
         isLoading: false,
         results: _.filter(this.props.source, isMatch),
       })
-    }, 200)
+    }, 100)
   }
 
   render() {
     const { isLoading, value, results } = this.state
     
-    const resRender = ({ Name, Type, Slug, Govt_Level }) => (
+    const resRender = ({ Name, Acronymn, Type, Slug }) => (
       <List.Item>
         <Link to={Type === "Board" ? `/board/${Slug}` : `/person/${Slug}`}>
           <List.Header as='a'>
-            {Name}
+            {Name} {Acronymn ? `(${Acronymn})` : `` }
           </List.Header>
           {Type === 'Board' ? 
-            <Label horizontal size='small' style={{ marginLeft: `5px` }}>
-              {Govt_Level} {Type}
+            <Label horizontal style={{ marginLeft: `6px` }}>
+              {Type.toUpperCase()}
             </Label>
             : <Icon name='user' style={{ marginLeft: `5px` }} color='grey' horizontal />
           }
@@ -54,7 +54,7 @@ class SearchAllNodes extends Component {
         placeholder="Search by name..."
         loading={isLoading}
         onResultSelect={this.handleResultSelect}
-        onSearchChange={_.debounce(this.handleSearchChange, 200, { leading: true })}
+        onSearchChange={_.debounce(this.handleSearchChange, 100, { leading: true })}
         results={results}
         resultRenderer={resRender}
         value={value}
