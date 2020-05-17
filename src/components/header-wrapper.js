@@ -12,7 +12,7 @@ const HeaderWrapper = () => {
           title
         }
       } 
-      boards: allAirtable(filter: {table: {eq: "Boards"}}) {
+      boards: allAirtable(filter: {table: {eq: "Boards"}, data: {Done: {eq: true}}}) {
         totalCount
         edges {
           node {
@@ -26,7 +26,7 @@ const HeaderWrapper = () => {
           }
         }
       }
-      people: allAirtable(filter: {table: {eq: "People"}}) {
+      people: allAirtable(filter: {table: {eq: "People"}, data: {Done: {eq: true}}}) {
         totalCount
         edges {
           node {

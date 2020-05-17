@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Container, Header, List, Label, Card } from "semantic-ui-react"
+import { Grid, Header, List, Label, Card } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
@@ -10,6 +10,7 @@ const IndexPage = ({ data }) => {
 
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
+
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
   console.log(orderedBoards)
   
@@ -34,13 +35,17 @@ const IndexPage = ({ data }) => {
                 <List.Item>
                   {b.Done ? 
                     <Link to={`/board/${b.Slug}`}>{b.Name}</Link> 
-                    : `${b.Name}`
+                    : <span style={{ color: `rgba(0,0,0,0.4)` }}>{b.Name}</span>
                   }
-                  {b.Govt_Level.map((g, i) => 
-                    <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`} style={{ marginLeft: `6px` }}>
-                      {g.toUpperCase()}
+                  {b.Done ? 
+                    b.Govt_Level.map((g, i) => 
+                      <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`} style={{ marginLeft: `6px` }}>
+                        {g.toUpperCase()}
+                      </Label>
+                    ) : <Label style={{ marginLeft: `6px` }}>
+                      {`COMING SOON`}
                     </Label>
-                  )}
+                  }
                 </List.Item>
               ))}
             </List>
@@ -89,7 +94,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query AllNodesQuery {
-    boards: allAirtable(filter: {table: {eq: "Boards"}, data: {Done: {eq: true}}}) {
+    boards: allAirtable(filter: {table: {eq: "Boards"}}) {
       totalCount
       edges {
         node {

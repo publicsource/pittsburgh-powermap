@@ -34,11 +34,10 @@ const Layout = ({ children }) => (
         flexDirection: `column`,
         justifyContent: `center`,
         alignItems: `center`,
-        flexShrink: 0,
         background: `#0d1c33`,
         color: `white`
       }}>
-        <span style={{ flex: `1 0 auto` }}>© Copyright 2020, PublicSource</span>
+        <span>© Copyright 2020, PublicSource</span>
     </footer>
   </>
 )

@@ -40,7 +40,7 @@ export default ({ data }) => {
           </Grid.Column>
           <Grid.Column>
             <Header as='h2' style={{ borderBottom: `5px solid #418cff`}}>{board.Number_of_Members} members</Header>
-            <List relaxed divided>
+            <List relaxed divided size='large'>
               {board.Positions.map(m => (
                 m.data.Person.map(n => (
                   <List.Item>
