@@ -1,38 +1,42 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Header, List, Label, Card } from "semantic-ui-react"
+import { Grid, Header, List, Label, Card, Image } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = ({ data }) => {
+import lbf from "../images/callouts/lbf.jpg"
+import fontana from "../images/callouts/fontana.jpg"
+import powell from "../images/callouts/powell.jpg"
 
+const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
-
+  
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
-  console.log(orderedBoards)
+  let readyBoards = _.filter(orderedBoards, function(o) { return o.Done || o.Next; });
   
   let people = data.people.edges.map(e => e.node.data)
   people.forEach(p => p.Type = "Person")
 
   let callouts = data.callouts.edges.map(e => e.node.data)
   let orderedCallouts = _.orderBy(callouts, callouts => callouts.Order, 'asc')
-  console.log(orderedCallouts)
 
   return (
     <Layout>
       <SEO title="Home" />
       <Grid stackable columns='equal'>
-        <Grid.Row centered>
+        <Grid.Row style={{ marginTop: `1em` }}>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, margin: `0 1.0875rem`, width: `100%`, }}>
+            First stop: 16 authorities that influence our economy and {people.length} people who serve on them
+          </Header>
+        </Grid.Row>
+        <Grid.Row>
           <Grid.Column>
-            <Header as='h2' style={{ borderBottom: `5px solid #418cff` }}>
-              First stop: 16 authorities that influence our economy
-            </Header>
-            <List divided relaxed size='large'>
-              {orderedBoards.map(b => (
-                <List.Item>
+            <List divided relaxed size='large' style={{ height: `605px`, overflowY: `scroll` }}>
+              {readyBoards.map((b, i) => (
+                <List.Item key={i}>
                   {b.Done ? 
                     <Link to={`/board/${b.Slug}`}>{b.Name}</Link> 
                     : <span style={{ color: `rgba(0,0,0,0.4)` }}>{b.Name}</span>
@@ -51,32 +55,42 @@ const IndexPage = ({ data }) => {
             </List>
           </Grid.Column>
           <Grid.Column>
-            <div style={{ background: `#f5f5f5`, height: `100%`, padding: 10 }}>
-              Spaceholder for graphics
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            {orderedCallouts.map(c => (
-              <Card
-                fluid
-                size='small'
-                href={`/person/${c.Person[0].data.Slug}`}
-                header={c.Person[0].data.Name}
-                meta={c.Boards.map((b, i) => (
-                  <span>
-                    {i > 0 ? `& ` : ``}
-                    <Link key={i} to={`/board/${b.data.Slug}`}>
-                      {b.data.Name}
+            {orderedCallouts.map((c, i) => (
+              <Card fluid key={i} style={{ borderLeft: `5px solid #418cff`, display: `flex`, flexDirection: `row`, alignItems: `center`, alignContent: `center` }}>
+                <Card.Content>
+                  <Card.Header as='h3' style={{ margin: 0 }}>
+                    <Link to={`/person/${c.Person[0].data.Slug}`}>
+                      {c.Person[0].data.Name}
                     </Link>
-                  </span>
-                ))}
-                description={c.Description}
-                style={{ borderLeft: `5px solid #418cff` }}
-              />
+                  </Card.Header>
+                  <Card.Meta>
+                    {c.Boards.map((b, i) => (
+                      <span key={i}>
+                        {i > 0 ? `& ` : ``}
+                        <Link to={`/board/${b.data.Slug}`}>
+                          {b.data.Name}
+                        </Link>
+                      </span>
+                    ))}
+                  </Card.Meta>
+                  <Card.Description>{c.Description}</Card.Description>
+                </Card.Content>
+                <Image 
+                  src={c.Image_Name === `lbf` ? lbf : c.Image_Name === `fontana` ? fontana : powell} 
+                  wrapped 
+                  size='small'
+                  bordered
+                />
+              </Card>
             ))}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered style={{ background: `white` }}>
+          <Grid.Column>
+            <div style={{ background: `#f5f5f5`, height: `100%`, padding: 10 }}>
+              Spaceholder for graphics
+            </div>
+          </Grid.Column>
           <Grid.Column>
             <Header as='h2' style={{ borderBottom: `5px solid #418cff` }}>About this project</Header>
             <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
@@ -103,6 +117,7 @@ export const query = graphql`
             Acronymn
             Slug
             Done
+            Next
             Govt_Level
             Number_of_Members
           }
@@ -129,6 +144,7 @@ export const query = graphql`
             Description
             Done
             Order
+            Image_Name
             Boards {
               data {
                 Name

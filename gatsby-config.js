@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     title: `Board Explorer`,
     description: `Understanding Pittsburgh's unelected power structure`,
-    author: `@gatsbyjs`,
+    author: `PublicSource`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -46,7 +46,7 @@ module.exports = {
           {
             baseId: `appqQXm5Zh9nWy2hq`,
             tableName: `Boards`,
-            tableLinks: [`Positions`]
+            tableLinks: [`Positions`, `Stories`]
           },
           {
             baseId: `appqQXm5Zh9nWy2hq`,
@@ -57,6 +57,11 @@ module.exports = {
             baseId: `appqQXm5Zh9nWy2hq`,
             tableName: `Callouts`,
             tableLinks: [`Person`, `Boards`]
+          },
+          {
+            baseId: `appqQXm5Zh9nWy2hq`,
+            tableName: `Stories`,
+            tableLinks: [`People`, `Boards`]
           }
         ]
       }

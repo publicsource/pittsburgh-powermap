@@ -52,10 +52,19 @@ const HeaderWrapper = () => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <section style={{ display: `flex`, flexDirection: `column`, alignContent: 'center', alignItems: 'center', flexWrap: `wrap`, background: `#0d1c33`, padding: `3em 1em` }}>
+      <section 
+        style={{ 
+          display: `flex`, 
+          flexDirection: `column`, 
+          alignContent: 'center', 
+          alignItems: 'center', 
+          flexWrap: `wrap`, 
+          background: `#0d1c33`, 
+          padding: `3em 1em`,
+        }}>
         <h1 style={{ color: `white`, marginBottom: 0 }}>BOARD EXPLORER</h1>
         <h2 style={{ color: `white`, marginTop: 0, textAlign: `center` }}>Understanding Pittsburgh's unelected power structure</h2>
-        <div style={{ width: `80%` }}>
+        <div style={{ maxWidth: `1275px`, width: `90%` }}>
           <SearchAllNodes source={allNodes} />
         </div>
       </section>
