@@ -13,7 +13,9 @@ import powell from "../images/callouts/powell.jpg"
 const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
+  
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
+  let readyBoards = _.filter(orderedBoards, function(o) { return o.Done || o.Next; });
   
   let people = data.people.edges.map(e => e.node.data)
   people.forEach(p => p.Type = "Person")
@@ -32,8 +34,8 @@ const IndexPage = ({ data }) => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <List divided relaxed size='large'>
-              {orderedBoards.map((b, i) => (
+            <List divided relaxed size='large' style={{ height: `605px`, overflowY: `scroll` }}>
+              {readyBoards.map((b, i) => (
                 <List.Item key={i}>
                   {b.Done ? 
                     <Link to={`/board/${b.Slug}`}>{b.Name}</Link> 
@@ -115,6 +117,7 @@ export const query = graphql`
             Acronymn
             Slug
             Done
+            Next
             Govt_Level
             Number_of_Members
           }

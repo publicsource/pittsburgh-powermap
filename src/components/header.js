@@ -2,16 +2,6 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
-const containerStyle = {
-  padding: `1.45rem 1.0875rem`, 
-  display: `flex`,
-  alignItems: `center`,
-  justifyContent: `space-between`,
-  flexWrap: `wrap`,
-  borderBottom: '4px solid white',
-  background: `#0d1c33`,
-}
-
 const linkStyle = {
   color: `white`,
   textDecoration: `none`,
@@ -20,30 +10,34 @@ const linkStyle = {
 }
 
 const Header = ({ siteTitle }) => (
-  <header style={containerStyle}>
-    <div style={{ display: `flex`, flexDirection: `row`, flexWrap: `wrap` }}>
-      <Link to="/" style={{ ...linkStyle, fontWeight: 700, textTransform: `uppercase` }}>
-        {siteTitle}
-      </Link>
-      <div>
-        <Link to="/" style={linkStyle}>
-          Home
-        </Link>
-        <Link to="/about" style={linkStyle}>
-          About
-        </Link>
-        <Link to="/stories" style={linkStyle}>
-          Stories
-        </Link>
-        <Link to="/contact" style={linkStyle}>
-          Contact
-        </Link>
+  <header style={{ background: `#0d1c33`, borderBottom: `4px solid white`, padding: `1em 1em` }}>
+    <div style={{ margin: `0 auto`, maxWidth: `1300px`, display: `flex`, alignItems: `center`, justifyContent: `space-between`, flexWrap: `wrap` }}>
+      <div style={{ display: `flex`, flexWrap: `wrap` }}>
+        <div>
+          <Link to="/" style={{ ...linkStyle, textTransform: `uppercase` }}>
+            {siteTitle}
+          </Link>
+        </div>
+        <div>
+          <Link to="/" style={linkStyle}>
+            Home
+          </Link>
+          <Link to="/about" style={linkStyle}>
+            About
+          </Link>
+          <Link to="/stories" style={linkStyle}>
+            Stories
+          </Link>
+          <Link to="/contact" style={linkStyle}>
+            Contact
+          </Link>
+        </div>
       </div>
-    </div>
-    <div>
-      <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontWeight: 800, fontFamily: `Mallory` }}>
-        PUBLICSOURCE
-      </a>
+      <div>
+        <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontFamily: `Mallory` }}>
+          PUBLICSOURCE
+        </a>
+      </div>
     </div>
   </header>
 )

@@ -48,24 +48,13 @@ export default ({ data }) => {
                 fluid
                 href={`/board/${p.data.Board[0].data.Slug}`}
                 header={p.data.Board[0].data.Name}
-                description={`${p.data.Office}, ${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
+                description={`${p.data.Office.substring(3)}, ${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
                 style={{ borderLeft: `5px solid #418cff` }}
               />
             ))}
           </Grid.Column>
-          <Grid.Column>
-            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
-              <Header as='h4'>CALLOUT</Header>
-            </div>
-            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
-              <Header as='h4'>CALLOUT</Header>
-            </div>
-          </Grid.Column>
         </Grid.Row>
       </Grid>
-
-      
-      
     </Layout>
   )
 }
