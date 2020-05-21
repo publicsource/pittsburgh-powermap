@@ -1,12 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, Label, List, Grid, Breadcrumb } from "semantic-ui-react"
+import { Header, Label, List, Grid, Breadcrumb, Card } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 export default ({ data }) => {
   let board = data.airtable.data
+  console.log(board, board.Stories)
 
   return (
     <Layout>
@@ -57,14 +58,15 @@ export default ({ data }) => {
               ))}
             </List>
           </Grid.Column>
-          <Grid.Column>
-            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
-              <Header as='h4'>CALLOUT</Header>
-            </div>
-            <div style={{ height: `190px`, background: `#eee`, marginBottom: `1em`, padding: `1em` }}>
-              <Header as='h4'>CALLOUT</Header>
-            </div>
-          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+        {board.Stories ?
+              board.Stories.map(s => (
+              <Card
+                header={s.data.Title}
+                meta={s.data.Date}
+              />
+            )) : ``}
         </Grid.Row>
       </Grid>
     </Layout>
@@ -98,6 +100,13 @@ export const query = graphql`
                 }
               }
             }
+          }
+        }
+        Stories {
+          data {
+            Title
+            Link
+            Date
           }
         }
       }
