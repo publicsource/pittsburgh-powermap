@@ -64,7 +64,7 @@ const HeaderWrapper = () => {
         }}>
         <h1 style={{ color: `white`, marginBottom: 0 }}>BOARD EXPLORER</h1>
         <h2 style={{ color: `white`, marginTop: 0, textAlign: `center` }}>Understanding Pittsburgh's unelected power structure</h2>
-        <div style={{ maxWidth: `1300px`, width: `90%` }}>
+        <div style={{ maxWidth: `1275px`, width: `90%` }}>
           <SearchAllNodes source={allNodes} />
         </div>
       </section>

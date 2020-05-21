@@ -6,8 +6,11 @@ import _ from "lodash"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = ({ data }) => {
+import lbf from "../images/callouts/lbf.jpg"
+import fontana from "../images/callouts/fontana.jpg"
+import powell from "../images/callouts/powell.jpg"
 
+const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
@@ -51,9 +54,8 @@ const IndexPage = ({ data }) => {
           </Grid.Column>
           <Grid.Column>
             {orderedCallouts.map((c, i) => (
-              <Card fluid size='small' key={i} style={{ borderLeft: `5px solid #418cff` }}>
+              <Card fluid key={i} style={{ borderLeft: `5px solid #418cff`, display: `flex`, flexDirection: `row`, alignItems: `center`, alignContent: `center` }}>
                 <Card.Content>
-                  <Image src={`../images/callouts/${c.Image_Name}.jpg`} size='small' floated='right' wrapped />
                   <Card.Header as='h3' style={{ margin: 0 }}>
                     <Link to={`/person/${c.Person[0].data.Slug}`}>
                       {c.Person[0].data.Name}
@@ -71,6 +73,12 @@ const IndexPage = ({ data }) => {
                   </Card.Meta>
                   <Card.Description>{c.Description}</Card.Description>
                 </Card.Content>
+                <Image 
+                  src={c.Image_Name === `lbf` ? lbf : c.Image_Name === `fontana` ? fontana : powell} 
+                  wrapped 
+                  size='small'
+                  bordered
+                />
               </Card>
             ))}
           </Grid.Column>
