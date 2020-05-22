@@ -5,6 +5,12 @@
  */
 
 const path = require('path');
+const express= require('express');
+
+// Render static html with `gatsby develop`, not only `gatsby build & gatsby serve`
+exports.onCreateDevServer = ({ app }) => {
+    app.use(express.static('public'))
+}
 
 // Initialize Semantic UI theme
 exports.onCreateWebpackConfig = ({ actions }) => {
