@@ -85,21 +85,30 @@ const IndexPage = ({ data }) => {
             ))}
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centered style={{ background: `white` }}>
+        <Grid.Row style={{ height: `820px` }}>
           <Grid.Column>
-            <div style={{ background: `#f5f5f5`, height: `100%`, padding: 10 }}>
-              Spaceholder for graphics
-            </div>
+            <iframe
+              src="/infogram_diversity.html"
+              title="Board Explorer chart: Race and gender"
+              style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
+            />
           </Grid.Column>
           <Grid.Column>
-            <Header as='h2' style={{ borderBottom: `5px solid #418cff` }}>About this project</Header>
-            <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
-            <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often decide what does and doesn’t get built, who gets contracts and grants, what rates and fees we pay for everything from bus rides to water, and more.</p>
-            <p>Now, as the region copes with the effects of the coronavirus pandemic, the operations of those boards are likely to affect our lives and futures more than ever. Already, boards are switching gears from managing growth to addressing an economic emergency. It’s time we got to know them better.</p>
-            <p>PublicSource’s new Board Explorer sheds light on the boards and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
-            <p>We’ll start with 16 boards involved — directly or indirectly — in the region’s economy. From Alcosan, which is rebuilding the sewer system, to the Zoning Board of Adjustment, which approves or denies construction proposals, these boards affect jobs, the built environment, housing, transportation, utilities, cultural assets and more.</p>
-            <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us.</p>
+            <iframe
+              src="/infogram_age.html"
+              title="Board Explorer chart: Generations"
+              style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
+            />
           </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About this project</Header>
+          <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
+          <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often decide what does and doesn’t get built, who gets contracts and grants, what rates and fees we pay for everything from bus rides to water, and more.</p>
+          <p>Now, as the region copes with the effects of the coronavirus pandemic, the operations of those boards are likely to affect our lives and futures more than ever. Already, boards are switching gears from managing growth to addressing an economic emergency. It’s time we got to know them better.</p>
+          <p>PublicSource’s new Board Explorer sheds light on the boards and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
+          <p>We’ll start with 16 boards involved — directly or indirectly — in the region’s economy. From Alcosan, which is rebuilding the sewer system, to the Zoning Board of Adjustment, which approves or denies construction proposals, these boards affect jobs, the built environment, housing, transportation, utilities, cultural assets and more.</p>
+          <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us.</p>
         </Grid.Row>
       </Grid>
     </Layout>

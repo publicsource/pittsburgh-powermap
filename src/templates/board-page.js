@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, Label, List, Grid, Breadcrumb, Card, Button } from "semantic-ui-react"
-import _ from "lodash"
+import { Header, Label, List, Grid, Breadcrumb, Card } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
