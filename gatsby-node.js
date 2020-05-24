@@ -52,7 +52,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   }
   `)
 
-  // Make a page for every board
+  // Make a page for every "done" board
   let boards = result.data.boards.edges.map(e => e.node.data)
   boards.forEach(b => {
     createPage({
@@ -64,7 +64,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
-  // Make a page for every person
+  // Make a page for every "done" person
   let people = result.data.people.edges.map(e => e.node.data)
   people.forEach(p => {
     createPage({

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import Header from "./header"
+import NavBar from "./nav-bar"
 import SearchAllNodes from "./search"
 
 const HeaderWrapper = () => {
@@ -51,7 +51,7 @@ const HeaderWrapper = () => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <NavBar siteTitle={data.site.siteMetadata.title} />
       <section 
         style={{ 
           display: `flex`, 

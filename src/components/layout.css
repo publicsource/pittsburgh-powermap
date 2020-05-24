@@ -2,14 +2,13 @@
   font-family: Mallory;
   src: url("../semantic/site/assets/fonts/mallory/Mallory-Medium.otf") format("opentype");
 }
-  
-/* p {
-  font-family: 'Crimson Text';
-  font-size: 1.2em;
-} */
 
-  /* @font-face {
-    font-family: MalloryBold;
-    font-weight: bold;
-    src: url("path/GraublauWebBold.otf") format("opentype");
-  } */
+@font-face {
+  font-family: MalloryBold;
+  font-weight: bold;
+  src: url("../semantic/site/assets/fonts/mallory/Mallory-Bold.otf") format("opentype");
+}
+  
+p {
+  font-family: 'Roboto';
+}

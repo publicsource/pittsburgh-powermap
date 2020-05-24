@@ -6,10 +6,9 @@ const linkStyle = {
   color: `white`,
   textDecoration: `none`,
   marginRight: `1em`,
-  fontFamily: `Mallory`,
 }
 
-const Header = ({ siteTitle }) => (
+const NavBar = ({ siteTitle }) => (
   <header style={{ background: `#0d1c33`, borderBottom: `4px solid white`, padding: `1em 1em` }}>
     <div style={{ margin: `0 auto`, maxWidth: `1300px`, display: `flex`, alignItems: `center`, justifyContent: `space-between`, flexWrap: `wrap` }}>
       <div style={{ display: `flex`, flexWrap: `wrap` }}>
@@ -25,16 +24,16 @@ const Header = ({ siteTitle }) => (
           <Link to="/about" style={linkStyle}>
             About
           </Link>
-          <Link to="/stories" style={linkStyle}>
+          <a href="https://publicsource.org/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
             Stories
-          </Link>
+          </a>
           <Link to="/contact" style={linkStyle}>
             Contact
           </Link>
         </div>
       </div>
       <div>
-        <a href="https://www.publicsource.org/" style={{ color: `#418cff`, fontFamily: `Mallory` }}>
+        <a href="https://www.publicsource.org/" target="_blank" rel="noopener noreferrer" style={{ color: `#418cff` }}>
           PUBLICSOURCE
         </a>
       </div>
@@ -42,12 +41,12 @@ const Header = ({ siteTitle }) => (
   </header>
 )
 
-Header.propTypes = {
+NavBar.propTypes = {
   siteTitle: PropTypes.string,
 }
 
-Header.defaultProps = {
+NavBar.defaultProps = {
   siteTitle: ``,
 }
 
-export default Header
+export default NavBar
