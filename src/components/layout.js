@@ -7,6 +7,7 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { Grid } from "semantic-ui-react"
 
 import HeaderWrapper from "./header-wrapper"
 import "semantic-ui-less/semantic.less"
@@ -23,14 +24,13 @@ const Layout = ({ children }) => (
         fontFamily: `Mallory`
       }}
     >
-      <main>
+      <Grid stackable columns='equal'>
         {children}
-      </main>
+      </Grid>
     </div>
     <footer
       style={{ 
         padding: `1.45rem 1.0875rem`,
-        marginBottom: 0,
         display: `flex`,
         flexDirection: `column`,
         justifyContent: `center`,

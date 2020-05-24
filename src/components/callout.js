@@ -8,8 +8,8 @@ import lp from "../images/lp_square.jpg"
 
 const Callout = ({ d, key }) => (
   <Item key={key} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
-    <Item.Content>
-      <Item.Header as='h3' style={{ margin: 0 }}>
+    <Item.Content verticalAlign='middle'>
+      <Item.Header as='h3'>
         <Link to={`/person/${d.Person[0].data.Slug}`}>
           {d.Person[0].data.Name}
         </Link>

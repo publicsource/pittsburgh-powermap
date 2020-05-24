@@ -1,60 +1,110 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, Grid, Card, Breadcrumb } from "semantic-ui-react"
+import { Header, Grid, Breadcrumb, Table, Item } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+// styles
+const tableKey = {
+  fontWeight: 900
+}
+
+const tableVal = {
+  fontFamily: `Roboto`
+}
+
 export default ({ data }) => {
   let person = data.person.edges[0].node.data
-  console.log(person)
 
   let schools = []
-  schools.push(person.High_School, person.College, person.College2, person.College3)
+  schools.push(
+    (person.High_School ? `${person.High_School} (High School)` : null),
+    person.College,
+    person.College2,
+    person.College3
+  )
+
+  let phones = []
+  phones.push(person.Public_Phone, person.Public_Phone2)
 
   return (
     <Layout>
       <SEO title={`${person.Name}`} />
-      <Grid stackable columns='equal'>
-        <Grid.Row style={{ marginLeft: `1em`, display: 'flex', flexDirection: 'column' }}>
-          <Breadcrumb>
-            <Breadcrumb.Section>
-              <Link to='/' style={{ color: `#418cff` }}>Home</Link>
-            </Breadcrumb.Section>
-            <Breadcrumb.Divider />
-            <Breadcrumb.Section active>Person</Breadcrumb.Section>
-          </Breadcrumb>
-          <Header as='h1'>{person.Name}</Header>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <Header as='h2'>Who they are</Header>
-            <Header as='h4'>Age</Header>
-            <p>{person.Age} years old</p>
-            <Header as='h4'>Party affiliation</Header>
-            <p>{!person.Party_Affiliation ? 'Unknown' : person.Party_Affiliation}</p>
-            <Header as='h4'>Residence</Header>
-            <p>{!person.Residence ? 'Unknown' : person.Residence}</p>
-            <Header as='h4'>Day job</Header>
-            <p>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</p>
-            <Header as='h4'>Education</Header>
-            <p>{_.compact(schools).join(', ')}</p>
-          </Grid.Column>
-          <Grid.Column>
-            <Header as='h2'>Boards they serve on</Header>
-            {person.Positions.map(p => (
-              <Card
-                fluid
-                href={`/board/${p.data.Board[0].data.Slug}`}
-                header={p.data.Board[0].data.Name}
-                description={`${p.data.Office.substring(3)}, ${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
-                style={{ borderLeft: `5px solid #418cff` }}
-              />
+      <Grid.Row style={{ marginLeft: `1em`, display: 'flex', flexDirection: 'column' }}>
+        <Breadcrumb>
+          <Breadcrumb.Section>
+            <Link to='/' style={{ color: `#418cff` }}>Home</Link>
+          </Breadcrumb.Section>
+          <Breadcrumb.Divider />
+          <Breadcrumb.Section active>Person</Breadcrumb.Section>
+        </Breadcrumb>
+        <Header as='h1'>{person.Name}</Header>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          <Header as='h2'>Who they are</Header>
+          <Table basic='very' stackable collapsing size='large' style={{ width: `100%` }}>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell style={tableKey}>Age</Table.Cell>
+                <Table.Cell style={tableVal}>{person.Age} years old</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell style={tableKey}>Party affiliation</Table.Cell>
+                <Table.Cell style={tableVal}>{!person.Party_Affiliation ? 'Unknown' : person.Party_Affiliation}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell style={tableKey}>Residence</Table.Cell>
+                <Table.Cell style={tableVal}>{!person.Residence ? 'Unknown' : person.Residence}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell style={tableKey}>Day job</Table.Cell>
+                <Table.Cell style={tableVal}>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell style={tableKey}>Education</Table.Cell>
+                <Table.Cell style={tableVal}>{_.compact(schools).join(', ')}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell style={tableKey}>Contact</Table.Cell>
+                <Table.Cell style={tableVal}>
+                  {_.compact(phones).join(', ')} <br/>
+                  {!person.Public_Email ? null 
+                    : <a style={{ borderBottom: `2px solid #418cff`, fontFamily: `Roboto` }} href={`mailto:${person.Public_Email}`}>
+                        {person.Public_Email}
+                      </a>
+                  }
+                </Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
+        </Grid.Column>
+        <Grid.Column>
+          <Header as='h2'>Boards they serve on</Header>
+          <Item.Group>
+            {person.Positions.map((p, i) => (
+              <Item key={i} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
+                <Item.Content verticalAlign='middle'>
+                  <Item.Header as='h3'>
+                    <Link to={`/board/${p.data.Board[0].data.Slug}`}>
+                      {p.data.Board[0].data.Name}
+                    </Link>
+                  </Item.Header>
+                  <Item.Meta>{p.data.Office.substring(3)}</Item.Meta>
+                  <Item.Description style={{ fontFamily: `Roboto` }}>
+                    {p.data.Board[0].data.Description}
+                  </Item.Description>
+                  <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
+                    {`${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
+                  </Item.Extra>
+                </Item.Content>
+              </Item>
             ))}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+          </Item.Group>
+        </Grid.Column>
+      </Grid.Row>
     </Layout>
   )
 }
@@ -80,6 +130,9 @@ export const query = graphql`
             College
             College2
             College3
+            Public_Phone
+            Public_Phone2
+            Public_Email
             Positions {
               data {
                 Name
@@ -91,6 +144,7 @@ export const query = graphql`
                   data {
                     Name
                     Slug
+                    Description
                   }
                 }
               }
