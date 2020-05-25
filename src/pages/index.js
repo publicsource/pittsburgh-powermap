@@ -7,6 +7,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Callout from "../components/callout"
 
+import ps_logo from "../images/ps_logo_square.png"
+
 const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
@@ -19,7 +21,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Home" thumbnail={ps_logo} />
       <Grid.Row style={{ marginTop: `1em` }}>
         <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>
           First stop: 16 authorities that influence our economy and the people who serve on them

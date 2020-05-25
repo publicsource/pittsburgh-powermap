@@ -4,9 +4,11 @@ import { Header, Grid } from "semantic-ui-react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import ps_logo from "../images/ps_logo_square.png"
+
 const AboutPage = () => (
   <Layout>
-    <SEO title="About" />
+    <SEO title="About" thumbnail={ps_logo} />
     <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
       <Header as='h1' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About</Header>
       <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
