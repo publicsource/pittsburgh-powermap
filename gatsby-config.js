@@ -6,7 +6,7 @@ module.exports = {
   pathPrefix: "/pittsburgh-powermap",
   siteMetadata: {
     title: `Board Explorer`,
-    description: `Board Explorer: Understanding Pittsburgh's unelected power structure`,
+    description: `Understanding Pittsburgh's unelected power structure`,
     author: `PublicSource`,
   },
   plugins: [

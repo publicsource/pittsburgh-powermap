@@ -27,6 +27,13 @@ function SEO({ description, lang, meta, title, thumbnail }) {
 
   const metaDescription = description || site.siteMetadata.description
 
+  let origin = "";
+  if (typeof window !== "undefined") {
+    origin = window.location.origin;
+  }
+
+  let img = origin + thumbnail
+
   return (
     <Helmet
       htmlAttributes={{
@@ -41,7 +48,7 @@ function SEO({ description, lang, meta, title, thumbnail }) {
         },
         {
           property: `og:title`,
-          content: title,
+          content: `${site.siteMetadata.title} | ${title}`,
         },
         {
           property: `og:description`,
@@ -53,7 +60,7 @@ function SEO({ description, lang, meta, title, thumbnail }) {
         },
         {
           property: `og:image`,
-          content: thumbnail,
+          content: img,
         },
         {
           name: `twitter:card`,
@@ -73,7 +80,7 @@ function SEO({ description, lang, meta, title, thumbnail }) {
         },
         {
           name: `twitter:image`,
-          content: thumbnail
+          content: img,
         }
       ].concat(meta)}
     />
@@ -84,6 +91,7 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
+  thumbnail: ``,
 }
 
 SEO.propTypes = {
@@ -91,6 +99,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
 }
 
 export default SEO
