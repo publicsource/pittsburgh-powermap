@@ -6,6 +6,8 @@ import _ from "lodash"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import ps_logo from "../images/ps_logo_square.png"
+
 // styles
 const tableKey = {
   fontWeight: 900
@@ -31,7 +33,7 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={`${person.Name}`} />
+      <SEO title={`${person.Name}`} thumbnail={ps_logo} />
       <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
         <Breadcrumb>
           <Breadcrumb.Section>

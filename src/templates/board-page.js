@@ -6,6 +6,8 @@ import _ from "lodash"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import ps_logo from "../images/ps_logo_square.png"
+
 export default ({ data }) => {
   let board = data.board.edges[0].node.data
   
@@ -18,7 +20,7 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={`${board.Name}`} />
+      <SEO title={`${board.Name}`} thumbnail={ps_logo} />
       <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
         <Breadcrumb>
           <Breadcrumb.Section>
