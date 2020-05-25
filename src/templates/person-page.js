@@ -32,7 +32,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <SEO title={`${person.Name}`} />
-      <Grid.Row style={{ marginLeft: `1em`, display: 'flex', flexDirection: 'column' }}>
+      <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
         <Breadcrumb>
           <Breadcrumb.Section>
             <Link to='/' style={{ color: `#418cff` }}>Home</Link>

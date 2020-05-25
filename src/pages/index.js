@@ -21,7 +21,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" />
       <Grid.Row style={{ marginTop: `1em` }}>
-        <Header as='h2' style={{ borderBottom: `5px solid #418cff`, margin: `0 1.0875rem`, width: `100%`, }}>
+        <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>
           First stop: 16 authorities that influence our economy and the people who serve on them
         </Header>
       </Grid.Row>
@@ -55,7 +55,7 @@ const IndexPage = ({ data }) => {
           </Item.Group>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row style={{ height: `820px` }}>
+      <Grid.Row stretched style={{ minHeight: `825px` }}>
         <Grid.Column>
           <iframe
             src="/infogram_diversity.html"

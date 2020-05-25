@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 const AboutPage = () => (
   <Layout>
     <SEO title="About" />
-    <Grid.Row style={{ marginLeft: `1em`, display: 'flex', flexDirection: 'column' }}>
+    <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
       <Header as='h1' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About</Header>
       <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
       <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often decide what does and doesn’t get built, who gets contracts and grants, what rates and fees we pay for everything from bus rides to water, and more.</p>
