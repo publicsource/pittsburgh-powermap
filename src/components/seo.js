@@ -27,13 +27,12 @@ function SEO({ description, lang, meta, title, thumbnail }) {
 
   const metaDescription = description || site.siteMetadata.description
 
-  let origin = "https://boards.publicsource.org/";
+  let origin = "https://boards.publicsource.org";
   if (typeof window !== "undefined") {
     origin = window.location.origin;
   }
 
   let img = origin + thumbnail
-  console.log(img)
 
   return (
     <Helmet

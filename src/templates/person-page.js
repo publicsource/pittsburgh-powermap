@@ -99,7 +99,9 @@ export default ({ data }) => {
                     {p.data.Board[0].data.Description}
                   </Item.Description>
                   <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
-                    {`${p.data.Term_Length}-year term: first served ${p.data.Term_Begin_Date}, current term ends ${p.data.Term_End_Date}`}
+                    {isNaN(p.data.Term_Length) ? `Term length is ${p.data.Term_Length.toLowerCase()}: ` : `${p.data.Term_Length}-year term: `}
+                    {`first served ${p.data.Term_Begin_Date}`}
+                    {isNaN(p.data.Term_End_Date.charAt(0)) ? `.` : `, current term ends ${p.data.Term_End_Date}.`}
                   </Item.Extra>
                 </Item.Content>
               </Item>
