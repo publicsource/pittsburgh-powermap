@@ -63,7 +63,7 @@ export default ({ data }) => {
               </Table.Row>
               <Table.Row>
                 <Table.Cell style={tableKey}>Day job</Table.Cell>
-                <Table.Cell style={tableVal}>{!person.Day_Job ? 'Unknown' : `${person.Day_Job}, ${person.Employer}`}</Table.Cell>
+                <Table.Cell style={tableVal}>{person.Work}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell style={tableKey}>Education</Table.Cell>
@@ -127,8 +127,7 @@ export const query = graphql`
             Number_of_Positions
             Age
             Residence
-            Day_Job
-            Employer
+            Work
             Party_Affiliation
             High_School
             College
