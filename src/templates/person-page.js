@@ -6,7 +6,7 @@ import _ from "lodash"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import ps_logo from "../images/ps_logo_square.png"
+import be_thumbnail from "../images/board_explorer_home.png"
 
 // styles
 const tableKey = {
@@ -33,7 +33,7 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={`${person.Name}`} thumbnail={ps_logo} />
+      <SEO title={`${person.Name}`} thumbnail={be_thumbnail} />
       <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
         <Grid.Column>
           <Breadcrumb>
@@ -65,15 +65,16 @@ export default ({ data }) => {
               </Table.Row>
               <Table.Row>
                 <Table.Cell style={tableKey}>Day job</Table.Cell>
-                <Table.Cell style={tableVal}>{person.Work}</Table.Cell>
+                <Table.Cell style={tableVal}>{!person.Work ? 'Unknown' : person.Work}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell style={tableKey}>Education</Table.Cell>
-                <Table.Cell style={tableVal}>{_.compact(schools).join(', ')}</Table.Cell>
+                <Table.Cell style={tableVal}>{schools.every(s => s === null) ? 'Unknown' : _.compact(schools).join(', ')}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell style={tableKey}>Contact</Table.Cell>
                 <Table.Cell style={tableVal}>
+                  {phones.every(p => p === null) && !person.Public_Email ? 'Unknown' : null}
                   {_.compact(phones).join(', ')} <br/>
                   {!person.Public_Email ? null 
                     : <a style={{ borderBottom: `2px solid #418cff`, fontFamily: `Roboto` }} href={`mailto:${person.Public_Email}`}>
