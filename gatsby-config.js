@@ -6,7 +6,7 @@ module.exports = {
   pathPrefix: "/pittsburgh-powermap",
   siteMetadata: {
     title: `Board Explorer`,
-    description: `Understanding Pittsburgh's unelected power structure`,
+    description: `Navigate the networks that call the shots in the Pittsburgh region. A new tool by PublicSource.`,
     author: `PublicSource`,
   },
   plugins: [

@@ -22,29 +22,31 @@ export default ({ data }) => {
     <Layout>
       <SEO title={`${board.Name}`} thumbnail={ps_logo} />
       <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
-        <Breadcrumb>
-          <Breadcrumb.Section>
-            <Link to='/' style={{ color: `#418cff` }}>Home</Link>
-          </Breadcrumb.Section>
-          <Breadcrumb.Divider />
-          <Breadcrumb.Section active>Board</Breadcrumb.Section>
-        </Breadcrumb>
-        <Header as='h1'>{board.Name} ({board.Acronymn})</Header>
-        <Header.Subheader>
-          {board.Govt_Level.map((g, i) => 
-            <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`} style={{ marginRight: `6px` }}>
-              {g.toUpperCase()}
-            </Label>
-          )}
-        </Header.Subheader>
+        <Grid.Column>
+          <Breadcrumb>
+            <Breadcrumb.Section>
+              <Link to='/' style={{ color: `#418cff` }}>Home</Link>
+            </Breadcrumb.Section>
+            <Breadcrumb.Divider />
+            <Breadcrumb.Section active>Board</Breadcrumb.Section>
+          </Breadcrumb>
+          <Header as='h1'>{board.Name} ({board.Acronymn})</Header>
+          <Header.Subheader>
+            {board.Govt_Level.map((g, i) => 
+              <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`} style={{ marginRight: `6px` }}>
+                {g.toUpperCase()}
+              </Label>
+            )}
+          </Header.Subheader>
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
           <Header as='h2'>What it does</Header>
           <p style={{ fontSize: `1.1em` }}>{board.Description}</p>
-          <Header as='h2'>When it meets</Header>
+          <Header as='h3'>When it meets</Header>
           <p style={{ fontSize: `1.1em` }}>{board.Meeting_Time}</p>
-          <Header as='h2'>Website</Header>
+          <Header as='h3'>Website</Header>
           <a href={board.Website} target="_blank" rel="noopener noreferrer" style={{ fontFamily: `Roboto`, borderBottom: `2px solid #418cff`, fontSize: `1.1em` }}>
             {board.Website}
           </a>
@@ -68,20 +70,22 @@ export default ({ data }) => {
         </Grid.Column>
       </Grid.Row>
       {board.Stories ? 
-        <Grid.Row style={{ display: `flex`, flexDirection: `column` }}>
-          <Header as='h2'>Stories</Header>
-          <Card.Group>
-            {board.Stories.map((s, i) => (
-                <Card key={i} fluid style={{ borderLeft: `5px solid #418cff` }}>
-                  <Card.Content>
-                    <Card.Header as='h5' style={{ marginBottom: 0 }}>
-                      <a href={s.data.Link}>{s.data.Title}</a>
-                    </Card.Header>
-                    <Card.Meta>{s.data.Date}</Card.Meta>
-                  </Card.Content>
-                </Card>
-            ))}
-          </Card.Group>
+        <Grid.Row style={{ display: `flex`, flexDirection: `column`, marginTop: `1em` }}>
+          <Grid.Column>
+            <Header as='h2'>Stories</Header>
+            <Card.Group>
+              {board.Stories.map((s, i) => (
+                  <Card key={i} fluid style={{ borderLeft: `5px solid #418cff` }}>
+                    <Card.Content>
+                      <Card.Header as='h5' style={{ marginBottom: 0 }}>
+                        <a href={s.data.Link} target="_blank" rel="noopener noreferrer">{s.data.Title}</a>
+                      </Card.Header>
+                      <Card.Meta>{s.data.Date}</Card.Meta>
+                    </Card.Content>
+                  </Card>
+              ))}
+            </Card.Group>
+          </Grid.Column>
         </Grid.Row> 
       : ``}
     </Layout>

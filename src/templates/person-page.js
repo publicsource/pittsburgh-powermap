@@ -35,14 +35,16 @@ export default ({ data }) => {
     <Layout>
       <SEO title={`${person.Name}`} thumbnail={ps_logo} />
       <Grid.Row style={{ marginTop: `1em`, display: 'flex', flexDirection: 'column' }}>
-        <Breadcrumb>
-          <Breadcrumb.Section>
-            <Link to='/' style={{ color: `#418cff` }}>Home</Link>
-          </Breadcrumb.Section>
-          <Breadcrumb.Divider />
-          <Breadcrumb.Section active>Person</Breadcrumb.Section>
-        </Breadcrumb>
-        <Header as='h1'>{person.Name}</Header>
+        <Grid.Column>
+          <Breadcrumb>
+            <Breadcrumb.Section>
+              <Link to='/' style={{ color: `#418cff` }}>Home</Link>
+            </Breadcrumb.Section>
+            <Breadcrumb.Divider />
+            <Breadcrumb.Section active>Person</Breadcrumb.Section>
+          </Breadcrumb>
+          <Header as='h1'>{person.Name}</Header>
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>

@@ -6,8 +6,8 @@ import lbf from "../images/lbf_square.jpg"
 import wf from "../images/wf_square.jpg"
 import lp from "../images/lp_square.jpg"
 
-const Callout = ({ d, key }) => (
-  <Item key={key} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
+const Callout = ({ d, index }) => (
+  <Item key={index} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
     <Item.Content verticalAlign='middle'>
       <Item.Header as='h3'>
         <Link to={`/person/${d.Person[0].data.Slug}`}>

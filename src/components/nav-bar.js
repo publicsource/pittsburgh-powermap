@@ -24,9 +24,9 @@ const NavBar = ({ siteTitle }) => (
           <Link to="/about" style={linkStyle}>
             About
           </Link>
-          <a href="https://publicsource.org/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
+          {/* <a href="https://publicsource.org/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
             Stories
-          </a>
+          </a> */}
           <Link to="/contact" style={linkStyle}>
             Contact
           </Link>

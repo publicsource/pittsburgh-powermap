@@ -51,7 +51,7 @@ class SearchAllNodes extends Component {
       <Search
         input={{ fluid: true }}
         fluid
-        placeholder="Search by name..."
+        placeholder="Search by name or board..."
         loading={isLoading}
         onResultSelect={this.handleResultSelect}
         onSearchChange={_.debounce(this.handleSearchChange, 100, { leading: true })}
