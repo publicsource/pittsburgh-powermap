@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Callout from "../components/callout"
 
-import thumb from "../images/board_explorer_home.png"
+import be_thumbnail from "../images/board_explorer_home.png"
 
 const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
@@ -21,7 +21,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Home" thumbnail={thumb} />
+      <SEO title="Home" thumbnail={be_thumbnail} />
       <Grid.Row style={{ marginTop: `1em` }}>
         <Grid.Column>
           <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>
