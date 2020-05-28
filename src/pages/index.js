@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Header, List, Label, Item } from "semantic-ui-react"
+import { Grid, Header, List, Label, Item, Responsive } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
@@ -71,7 +71,7 @@ const IndexPage = ({ data }) => {
           </Item.Group>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row style={{ minHeight: `825px` }}>
+      <Responsive as={Grid.Row} {...Responsive.onlyComputer} style={{ minHeight: `825px` }}>
         <Grid.Column>
           <iframe
             src="/infogram_diversity.html"
@@ -86,7 +86,23 @@ const IndexPage = ({ data }) => {
             style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
           />
         </Grid.Column>
-      </Grid.Row>
+      </Responsive>
+      <Responsive as={Grid.Row} {...Responsive.onlyMobile} style={{ minHeight: `1850px` }}>
+        <Grid.Column>
+          <iframe
+            src="/infogram_diversity.html"
+            title="Board Explorer chart: Race and gender"
+            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
+          />
+        </Grid.Column>
+        <Grid.Column>
+          <iframe
+            src="/infogram_age.html"
+            title="Board Explorer chart: Generations"
+            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
+          />
+        </Grid.Column>
+      </Responsive>
       <Grid.Row>
         <Grid.Column>
           <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About this project</Header>
