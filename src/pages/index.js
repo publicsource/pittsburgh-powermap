@@ -71,7 +71,7 @@ const IndexPage = ({ data }) => {
           </Item.Group>
         </Grid.Column>
       </Grid.Row>
-      <Responsive as={Grid.Row} {...Responsive.onlyComputer} style={{ minHeight: `825px` }}>
+      <Grid.Row style={{ minHeight: `825px` }}>
         <Grid.Column>
           <iframe
             src="/infogram_diversity.html"
@@ -86,8 +86,8 @@ const IndexPage = ({ data }) => {
             style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
           />
         </Grid.Column>
-      </Responsive>
-      <Responsive as={Grid.Row} {...Responsive.onlyMobile} style={{ minHeight: `1850px` }}>
+      </Grid.Row>
+      {/* <Responsive as={Grid.Row} {...Responsive.onlyMobile} style={{ minHeight: `1850px` }}>
         <Grid.Column>
           <iframe
             src="/infogram_diversity.html"
@@ -102,7 +102,7 @@ const IndexPage = ({ data }) => {
             style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
           />
         </Grid.Column>
-      </Responsive>
+      </Responsive> */}
       <Grid.Row>
         <Grid.Column>
           <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About this project</Header>
