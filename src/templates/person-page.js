@@ -46,7 +46,7 @@ export default ({ data }) => {
           <Header as='h1'>{person.Name}</Header>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
+      <Grid.Row style={{ marginBottom: `1em` }}>
         <Grid.Column>
           <Header as='h2'>Who they are</Header>
           <Table basic='very' stackable collapsing size='large' style={{ width: `100%` }}>
@@ -102,7 +102,8 @@ export default ({ data }) => {
                     {p.data.Board[0].data.Description}
                   </Item.Description>
                   <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
-                    {isNaN(p.data.Term_Length) ? `Term length is ${p.data.Term_Length.toLowerCase()}: ` : `${p.data.Term_Length}-year term: `}
+                    {isNaN(p.data.Term_Length) ? `Term length is ${p.data.Term_Length.toLowerCase()}: ` 
+                      : p.data.Term_Length === null ? `Unknown term length: ` : `${p.data.Term_Length}-year term: `}
                     {`first served ${p.data.Term_Begin_Date}`}
                     {isNaN(p.data.Term_End_Date.charAt(0)) ? `.` : `, current term ends ${p.data.Term_End_Date}.`}
                   </Item.Extra>
