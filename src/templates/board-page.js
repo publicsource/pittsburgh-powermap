@@ -62,7 +62,7 @@ export default ({ data }) => {
                   </Link>
                 </List.Header>
                 <List.Description style={{ fontFamily: `Roboto` }}>
-                  {m.data.Office.slice(2)}{m.data.Term_Begin_Date === 'Unknown' ? '' : `, joined ${m.data.Term_Begin_Date}`}
+                  {m.data.Office.slice(2)}{!m.data.Term_Begin_Date || m.data.Term_Begin_Date === 'Unknown' ? '' : `, joined ${m.data.Term_Begin_Date}`}
                 </List.Description>
               </List.Item>
             ))}
