@@ -45,7 +45,7 @@ export default ({ data }) => {
           <Header as='h2'>What it does</Header>
           <p style={{ fontSize: `1.1em` }}>{board.Description}</p>
           <Header as='h3'>When it meets</Header>
-          <p style={{ fontSize: `1.1em` }}>{board.Meeting_Time}</p>
+          <p style={{ fontSize: `1.1em` }}>{!board.Meeting_Time ? 'Unknown' : board.Meeting_Time}</p>
           <Header as='h3'>Website</Header>
           <a href={board.Website} target="_blank" rel="noopener noreferrer" style={{ fontFamily: `Roboto`, borderBottom: `2px solid #418cff`, fontSize: `1.1em` }}>
             {board.Website}
@@ -62,7 +62,7 @@ export default ({ data }) => {
                   </Link>
                 </List.Header>
                 <List.Description style={{ fontFamily: `Roboto` }}>
-                  {m.data.Office.slice(2)}, joined {m.data.Term_Begin_Date}
+                  {m.data.Office.slice(2)}{m.data.Term_Begin_Date === 'Unknown' ? '' : `, joined ${m.data.Term_Begin_Date}`}
                 </List.Description>
               </List.Item>
             ))}
