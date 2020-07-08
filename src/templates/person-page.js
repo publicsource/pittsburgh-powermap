@@ -53,7 +53,7 @@ export default ({ data }) => {
             <Table.Body>
               <Table.Row>
                 <Table.Cell style={tableKey}>Age</Table.Cell>
-                <Table.Cell style={tableVal}>{person.Age} years old</Table.Cell>
+                <Table.Cell style={tableVal}>{person.Age > 0 ? `${person.Age} years old` : 'Unknown'}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell style={tableKey}>Party affiliation</Table.Cell>
@@ -89,27 +89,28 @@ export default ({ data }) => {
         <Grid.Column>
           <Header as='h2'>Boards they serve on</Header>
           <Item.Group>
-            {person.Positions.map((p, i) => (
-              <Item key={i} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
-                <Item.Content verticalAlign='middle'>
-                  <Item.Header as='h3'>
-                    <Link to={`/board/${p.data.Board[0].data.Slug}`}>
-                      {p.data.Board[0].data.Name}
-                    </Link>
-                  </Item.Header>
-                  <Item.Meta>{p.data.Office.substring(3)}</Item.Meta>
-                  <Item.Description style={{ fontFamily: `Roboto` }}>
-                    {p.data.Board[0].data.Description}
-                  </Item.Description>
-                  <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
-                    {isNaN(p.data.Term_Length) ? `Term length is ${p.data.Term_Length.toLowerCase()}: ` 
-                      : p.data.Term_Length === null ? `Unknown term length: ` : `${p.data.Term_Length}-year term: `}
-                    {`first served ${p.data.Term_Begin_Date}`}
-                    {isNaN(p.data.Term_End_Date.charAt(0)) ? `.` : `, current term ends ${p.data.Term_End_Date}.`}
-                  </Item.Extra>
-                </Item.Content>
-              </Item>
-            ))}
+            {person.Positions.map((p, i) => 
+              !p.data.Board[0].data.Done ? `` : 
+                <Item key={i} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
+                  <Item.Content verticalAlign='middle'>
+                    <Item.Header as='h3'>
+                      <Link to={`/board/${p.data.Board[0].data.Slug}`}>
+                        {p.data.Board[0].data.Name}
+                      </Link>
+                    </Item.Header>
+                    <Item.Meta>{p.data.Office.substring(3)}</Item.Meta>
+                    <Item.Description style={{ fontFamily: `Roboto` }}>
+                      {p.data.Board[0].data.Description}
+                    </Item.Description>
+                    <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
+                      {!p.data.Term_Length ? `Unknown term length ` 
+                        : p.data.Term_Length > 0 ? `${p.data.Term_Length}-year term: ` :  `Term length ${p.data.Term_Length.toLowerCase()}: `}
+                      {!p.data.Term_Begin_Date || p.data.Term_Begin_Date === 'Unknown' ? `` : `first served ${p.data.Term_Begin_Date}`}
+                      {!p.data.Term_End_Date ? `` : isNaN(p.data.Term_End_Date.charAt(0)) ? `` : `, current term ends ${p.data.Term_End_Date}.`}
+                    </Item.Extra>
+                  </Item.Content>
+                </Item>
+            )}
           </Item.Group>
         </Grid.Column>
       </Grid.Row>
@@ -152,6 +153,7 @@ export const query = graphql`
                     Name
                     Slug
                     Description
+                    Done
                   }
                 }
               }

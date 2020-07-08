@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Item, Image } from 'semantic-ui-react'
 
-import lbf from "../images/lbf_square.jpg"
-import wf from "../images/wf_square.jpg"
-import lp from "../images/lp_square.jpg"
+import eld from "../images/emma-lucas-darby.jpg"
+import rrb from "../images/rev-ricky-burgess.jpg"
+import tcw from "../images/thomas-c-waters.jpg"
 
 const Callout = ({ d, index }) => (
   <Item key={index} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
@@ -27,7 +27,7 @@ const Callout = ({ d, index }) => (
       <Item.Description style={{ fontFamily: `Roboto` }}>{d.Description}</Item.Description>
     </Item.Content>
     <Image 
-      src={d.Image_Name === `lbf_square` ? lbf : d.Image_Name === `wf_square` ? wf : lp} 
+      src={d.Person[0].data.Name === 'Emma Lucas-Darby' ? eld : d.Person[0].data.Name === 'Rev. Ricky Burgess' ? rrb : tcw}
       size='small'
       circular />
   </Item>

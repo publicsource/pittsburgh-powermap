@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Header, List, Label, Item, Responsive } from "semantic-ui-react"
+import { Grid, Header, List, Label, Item } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
@@ -25,7 +25,7 @@ const IndexPage = ({ data }) => {
       <Grid.Row style={{ marginTop: `1em` }}>
         <Grid.Column>
           <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>
-            First stop: 16 authorities that influence our economy and the people who serve on them
+            In the spotlight: 30 panels that address public safety, public health and economic development
           </Header>
         </Grid.Column>
       </Grid.Row>
@@ -60,15 +60,26 @@ const IndexPage = ({ data }) => {
               <Item.Content verticalAlign='middle'>
                 <Item.Header as='h3' style={{ fontSize: `1em` }}>
                   <a 
-                    href="https://www.publicsource.org/99-people-who-will-help-shape-the-pittsburgh-regions-recovery-allegheny"
+                    href="https://www.publicsource.org/who-polices-the-police-in-pittsburgh-and-allegheny-county-a-critical-crossroads-for-civilian-review/"
                     target="_blank" 
                     rel="noopener noreferrer">
-                    READ MORE: 99 people who will help shape the Pittsburgh region’s recovery
+                    READ MORE: The board charged with reviewing accusations against police
                   </a>
                 </Item.Header>
               </Item.Content>
             </Item>
           </Item.Group>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About this project</Header>
+            <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
+            <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often push for new policies, award contracts and grants, lead the charge against disease and pollution, and more.</p>
+            <p>Now, as the region copes with the effects of the COVID-19 pandemic and surging civil rights concerns, the operations of those boards are likely to affect our lives and futures more than ever. It’s time we got to know them better.</p>
+            <p>PublicSource’s new Board Explorer sheds light on these panels and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
+            <p>We started with 16 boards involved — directly or indirectly — in development. Now we're sharing details on 14 boards that address public safety, public health and economic opportunity.</p>
+            <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us and, if you have a story idea or something you think we should investigate, please <Link to="/contact" style={{ borderBottom: `2px solid #418cff` }}>let us know</Link>.</p>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row style={{ minHeight: `825px` }}>
@@ -103,17 +114,6 @@ const IndexPage = ({ data }) => {
           />
         </Grid.Column>
       </Responsive> */}
-      <Grid.Row>
-        <Grid.Column>
-          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About this project</Header>
-          <p>The Pittsburgh region is run in large part by more than 500 unelected board members of authorities, commissions and other governmental agencies.</p>
-          <p>Board members usually don’t get headlines. Those go to the mayor, the county executive or, occasionally, council members, controllers and directors. But boards often decide what does and doesn’t get built, who gets contracts and grants, what rates and fees we pay for everything from bus rides to water, and more.</p>
-          <p>Now, as the region copes with the effects of the coronavirus pandemic, the operations of those boards are likely to affect our lives and futures more than ever. Already, boards are switching gears from managing growth to addressing an economic emergency. It’s time we got to know them better.</p>
-          <p>PublicSource’s new Board Explorer sheds light on the boards and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
-          <p>We’ll start with 16 boards involved — directly or indirectly — in the region’s economy. From ALCOSAN, which is rebuilding the sewer system, to the Zoning Board of Adjustment, which approves or denies construction proposals, these boards affect jobs, the built environment, housing, transportation, utilities, cultural assets and more.</p>
-          <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us and, if you have a story idea or something you think we should investigate, please <Link to="/contact" style={{ borderBottom: `2px solid #418cff` }}>let us know</Link>.</p>
-        </Grid.Column>
-      </Grid.Row>
     </Layout>
   )
 }
@@ -144,7 +144,6 @@ export const query = graphql`
             Description
             Done
             Order
-            Image_Name
             Boards {
               data {
                 Name
