@@ -60,7 +60,7 @@ const IndexPage = ({ data }) => {
               <Item.Content verticalAlign='middle'>
                 <Item.Header as='h3' style={{ fontSize: `1em` }}>
                   <a 
-                    href="https://www.publicsource.org/"
+                    href="https://www.publicsource.org/who-polices-the-police-in-pittsburgh-and-allegheny-county-a-critical-crossroads-for-civilian-review/"
                     target="_blank" 
                     rel="noopener noreferrer">
                     READ MORE: The board charged with reviewing accusations against police
