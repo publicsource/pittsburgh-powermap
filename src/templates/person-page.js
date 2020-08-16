@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Header, Grid, Breadcrumb, Table, Item } from "semantic-ui-react"
+import { Header, Grid, Breadcrumb, Table, Item, Label } from "semantic-ui-react"
 import _ from "lodash"
 
 import Layout from "../components/layout"
@@ -30,6 +30,9 @@ export default ({ data }) => {
 
   let phones = []
   phones.push(person.Public_Phone, person.Public_Phone2)
+
+  let positions = _.filter(person.Positions, p => p.data.Expired === null)
+  let expiredPositions = _.filter(person.Positions, p => p.data.Expired === true)
 
   return (
     <Layout>
@@ -87,31 +90,78 @@ export default ({ data }) => {
           </Table>
         </Grid.Column>
         <Grid.Column>
-          <Header as='h2'>Boards they serve on</Header>
-          <Item.Group>
-            {person.Positions.map((p, i) => 
-              !p.data.Board[0].data.Done ? `` : 
-                <Item key={i} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
-                  <Item.Content verticalAlign='middle'>
-                    <Item.Header as='h3'>
-                      <Link to={`/board/${p.data.Board[0].data.Slug}`}>
-                        {p.data.Board[0].data.Name}
-                      </Link>
-                    </Item.Header>
-                    <Item.Meta>{p.data.Office.substring(3)}</Item.Meta>
-                    <Item.Description style={{ fontFamily: `Roboto` }}>
-                      {p.data.Board[0].data.Description}
-                    </Item.Description>
-                    <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
-                      {!p.data.Term_Length ? `Unknown term length ` 
-                        : p.data.Term_Length > 0 ? `${p.data.Term_Length}-year term: ` :  `Term length ${p.data.Term_Length.toLowerCase()}: `}
-                      {!p.data.Term_Begin_Date || p.data.Term_Begin_Date === 'Unknown' ? `` : `first served ${p.data.Term_Begin_Date}`}
-                      {!p.data.Term_End_Date ? `` : isNaN(p.data.Term_End_Date.charAt(0)) ? `` : `, current term ends ${p.data.Term_End_Date}.`}
-                    </Item.Extra>
-                  </Item.Content>
-                </Item>
-            )}
-          </Item.Group>
+          {positions.length > 0 ? (
+            <>
+              <Header as='h2'>Boards they serve on</Header>
+              <Item.Group>
+                {positions.map((p, i) => 
+                  !p.data.Board[0].data.Done ? `` : 
+                    <Item key={i} style={{ background: `#f5f5f5`, borderLeft: `5px solid #418cff`, padding: `.8em` }}>
+                      <Item.Content verticalAlign='middle'>
+                        <Item.Header as='h3' style={{ display: `flex`, flexDirection: `row`, justifyContent: `space-between` }}>
+                          <Link to={`/board/${p.data.Board[0].data.Slug}`}>
+                            {p.data.Board[0].data.Name}
+                          </Link>
+                          <div>
+                            {p.data.Board[0].data.Govt_Level.map((g, i) => 
+                              <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`}>
+                                {g.toUpperCase()}
+                              </Label>
+                            )}
+                          </div>
+                        </Item.Header>
+                        <Item.Meta>{p.data.Office.substring(3)}</Item.Meta>
+                        <Item.Description style={{ fontFamily: `Roboto` }}>
+                          {p.data.Board[0].data.Description}
+                        </Item.Description>
+                        <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
+                          {!p.data.Term_Length ? `Unknown term length ` 
+                            : p.data.Term_Length > 0 ? `${p.data.Term_Length}-year term: ` :  `Term length ${p.data.Term_Length.toLowerCase()}: `}
+                          {!p.data.Term_Begin_Date || p.data.Term_Begin_Date === 'Unknown' ? `` : `first served ${p.data.Term_Begin_Date}`}
+                          {!p.data.Term_End_Date ? `` : isNaN(p.data.Term_End_Date.charAt(0)) ? `` : `, current term ends ${p.data.Term_End_Date}.`}
+                        </Item.Extra>
+                      </Item.Content>
+                    </Item>
+                )}
+              </Item.Group>
+            </>
+          ) : null}
+          {expiredPositions.length > 0 ? (
+            <>
+              <Header as='h2'>Boards they used to serve on</Header>
+              <Item.Group>
+                {expiredPositions.map((p, i) => 
+                  !p.data.Board[0].data.Done ? `` : 
+                    <Item key={i} style={{ background: `#f5f5f5`, borderLeft: `5px solid #8d8d8d`, padding: `.8em` }}>
+                      <Item.Content verticalAlign='middle'>
+                        <Item.Header as='h3' style={{ display: `flex`, flexDirection: `row`, justifyContent: `space-between` }}>
+                          <Link to={`/board/${p.data.Board[0].data.Slug}`}>
+                            {p.data.Board[0].data.Name}
+                          </Link>
+                          <div>
+                            {p.data.Board[0].data.Govt_Level.map((g, i) => 
+                              <Label horizontal key={i} color={g === 'City' ? `orange` : `yellow`}>
+                                {g.toUpperCase()}
+                              </Label>
+                            )}
+                          </div>
+                        </Item.Header>
+                        <Item.Meta>{p.data.Office.substring(3)}</Item.Meta>
+                        <Item.Description style={{ fontFamily: `Roboto` }}>
+                          {p.data.Board[0].data.Description}
+                        </Item.Description>
+                        <Item.Extra style={{ fontFamily: `Roboto`, color: `rgba(0,0,0,.85)` }}>
+                          {!p.data.Term_Length ? `Unknown term length ` 
+                            : p.data.Term_Length > 0 ? `${p.data.Term_Length}-year term: ` :  `Term length ${p.data.Term_Length.toLowerCase()}: `}
+                          {!p.data.Term_Begin_Date || p.data.Term_Begin_Date === 'Unknown' ? `` : `first served ${p.data.Term_Begin_Date}`}
+                          {!p.data.Term_End_Date ? `` : isNaN(p.data.Term_End_Date.charAt(0)) ? `` : `, last term ended ${p.data.Term_End_Date}.`}
+                        </Item.Extra>
+                      </Item.Content>
+                    </Item>
+                )}
+              </Item.Group>
+            </>
+          ) : null}
         </Grid.Column>
       </Grid.Row>
     </Layout>
@@ -155,6 +205,7 @@ export const query = graphql`
                     Slug
                     Description
                     Done
+                    Govt_Level
                   }
                 }
               }

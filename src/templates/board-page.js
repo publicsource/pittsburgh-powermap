@@ -69,9 +69,9 @@ export default ({ data }) => {
               </List.Item>
             ))}
           </List>
-          {expiredPositions.length > 1 ? (
+          {expiredPositions.length > 0 ? (
             <>
-              <Header as='h3' style={{ borderBottom: `5px solid grey`}}>{expiredPositions.length} prior members</Header>
+              <Header as='h3' style={{ borderBottom: `5px solid #8d8d8d`}}>{expiredPositions.length} prior members</Header>
               <List relaxed divided size='large'>
                 {expiredPositions.map((m, i) => (
                   <List.Item key={i}>
