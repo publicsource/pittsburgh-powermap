@@ -148,6 +148,7 @@ export const query = graphql`
                 Term_Begin_Date
                 Term_End_Date
                 Term_Length
+                Expired
                 Board {
                   data {
                     Name
