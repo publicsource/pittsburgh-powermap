@@ -27,7 +27,10 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
   {
-    boards: allAirtable(filter: {table: {eq: "Boards"}, data: {Done: {eq: true}}}) {
+    boards: allAirtable(filter: {
+      table: {eq: "Boards"}, 
+      data: {Done: {eq: true}}
+    }) {
       totalCount
       edges {
         node {
@@ -38,7 +41,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
       }
     }
-    people: allAirtable(filter: {table: {eq: "People"}, data: {Done: {eq: true}}}) {
+    people: allAirtable(filter: {
+      table: {eq: "People"}, 
+      data: {Done__from_Boards___from_Positions_: {eq: true}}
+    }) {
       totalCount
       edges {
         node {
