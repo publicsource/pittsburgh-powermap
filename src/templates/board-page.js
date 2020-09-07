@@ -11,7 +11,9 @@ import be_thumbnail from "../images/board_explorer_home.png"
 export default ({ data }) => {
   let board = data.board.edges[0].node.data
   
-  let positions = board.Positions
+  let positions = _.filter(board.Positions, p => p.data.Expired === null)
+  let expiredPositions = _.filter(board.Positions, p => p.data.Expired === true)
+
   let orderedPositions = _.orderBy(
     positions, 
     [positions => positions.data.Office, positions => positions.data.Person[0].data.Name],
@@ -52,7 +54,7 @@ export default ({ data }) => {
           </a>
         </Grid.Column>
         <Grid.Column>
-          <Header as='h2' style={{ borderBottom: `5px solid #418cff`}}>{board.Number_of_Members} members</Header>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`}}>{positions.length} members</Header>
           <List relaxed divided size='large'>
             {orderedPositions.map((m, i) => (
               <List.Item key={i}>
@@ -67,6 +69,25 @@ export default ({ data }) => {
               </List.Item>
             ))}
           </List>
+          {expiredPositions.length > 0 ? (
+            <>
+              <Header as='h3' style={{ borderBottom: `5px solid #8d8d8d`}}>{expiredPositions.length} prior members</Header>
+              <List relaxed divided size='large'>
+                {expiredPositions.map((m, i) => (
+                  <List.Item key={i}>
+                    <List.Header>
+                      <Link to={`/person/${m.data.Person[0].data.Slug}`}>
+                        {m.data.Person[0].data.Name}
+                      </Link>
+                    </List.Header>
+                    <List.Description style={{ fontFamily: `Roboto` }}>
+                      Served as {m.data.Office.slice(2)} {m.data.Term_Begin_Date} - {m.data.Term_End_Date}
+                    </List.Description>
+                  </List.Item>
+                ))}
+              </List>
+            </>
+          ) : null}
         </Grid.Column>
       </Grid.Row>
       {board.Stories ? 
@@ -114,6 +135,7 @@ export const query = graphql`
                 Term_Length
                 Term_Begin_Date
                 Term_End_Date
+                Expired
                 Person {
                   data {
                     Name
