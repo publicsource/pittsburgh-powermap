@@ -10,7 +10,7 @@ Board Explorer is built with [GatsbyJS](https://www.gatsbyjs.com/), a static-sit
 
 If you're only making small content edits, it may be simplest to edit files directly in Github (requires a user account with write access to this organization & repository).
 
-You can find direct links to files and relevant lines of code from the Wiki pages for editing content here: 
+You can find direct links to files and further instructions for editing specific content areas here: https://github.com/publicsource/pittsburgh-powermap/wiki
 
 Navigate to a file and:
 - Click the "edit" icon in the upper right
@@ -19,7 +19,7 @@ Navigate to a file and:
 - **Most importantly** select the option to "Create a new branch for this commit and start a pull request." (do not commit direct to `master`)
 - Click the "Propose changes" button
 
-Then you can navigate to your pull request where Netlify will automatically generate a "Deploy Preview" link to review your changes before merging them to the live site.
+Then you can navigate to your pull request where Netlify will automatically generate a "Deploy preview" link to review your changes before merging them to the live site.
 
 ### Option 2: Run the code locally
 
