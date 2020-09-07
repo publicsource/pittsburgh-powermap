@@ -28,11 +28,11 @@ Requires [Node](https://nodejs.org/en/download/) (> version 10.3), [Yarn](https:
 Clone this repository, then:
 - Copy `.env.example` to `.env.development` & `.env.production` and add your secret key (find it in Airtable >> Account overview)
 - Run `yarn` to install dependencies
-- Run `gatsby develop` to start the development server at `localhost:8000` and GraphiQL, an in-browser IDE, to explore our site's data at http://localhost:8000/___graphql (especially useful for testing how to query the Airtable schema)
+- Run `gatsby develop` to start the development server at `localhost:8000` and GraphiQL, an in-browser IDE, to explore our site's data at `http://localhost:8000/___graphql` (especially useful for testing how to query the Airtable schema)
 
 You should be up & running from here! 
 
-Commit your changes to a Github branch (not `master`) and open a PR.
+Commit your changes to a Github branch (not `master`) and open a PR as usual.
 
 ## Deploy
 
