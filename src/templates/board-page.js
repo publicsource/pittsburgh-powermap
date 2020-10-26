@@ -96,14 +96,14 @@ export default ({ data }) => {
             <Header as='h2'>Stories</Header>
             <Card.Group>
               {board.Stories.map((s, i) => (
-                  <Card key={i} fluid style={{ borderLeft: `5px solid #418cff` }}>
-                    <Card.Content>
-                      <Card.Header as='h5' style={{ marginBottom: 0 }}>
-                        <a href={s.data.Link} target="_blank" rel="noopener noreferrer">{s.data.Title}</a>
-                      </Card.Header>
-                      <Card.Meta>{s.data.Date}</Card.Meta>
-                    </Card.Content>
-                  </Card>
+                <Card key={i} fluid style={{ borderLeft: `5px solid #418cff` }}>
+                  <Card.Content>
+                    <Card.Header as='h5' style={{ marginBottom: 0 }}>
+                      <a href={s.data.Link} target="_blank" rel="noopener noreferrer">{s.data.Title}</a>
+                    </Card.Header>
+                    <Card.Meta>{s.data.Date}</Card.Meta>
+                  </Card.Content>
+                </Card>
               ))}
             </Card.Group>
           </Grid.Column>
@@ -117,7 +117,15 @@ export const query = graphql`
   query GetBoardDetails (
     $name: String!
   ) {
-    board: allAirtable(filter: {table: {eq: "Boards"}, data: {Name: {eq: $name}}}) {
+    board: allAirtable(
+      filter: {
+        table: {eq: "Boards"}, 
+        data: {Name: {eq: $name}}
+      }, 
+      sort: {
+        fields: data___Stories___data___Date,
+        order: DESC
+      }) {
       totalCount
       edges {
         node {

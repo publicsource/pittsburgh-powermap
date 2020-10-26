@@ -82,18 +82,27 @@ const IndexPage = ({ data }) => {
             <p>Over the coming months, PublicSource will add more boards, further analysis and deeper looks at key members. Explore with us and, if you have a story idea or something you think we should investigate, please <Link to="/contact" style={{ borderBottom: `2px solid #418cff` }}>let us know</Link>.</p>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row style={{ minHeight: `825px` }}>
+      <Grid.Row style={{ minHeight: `700px` }}>
         <Grid.Column>
           <iframe
-            src="/infogram_diversity.html"
-            title="Board Explorer chart: Race and gender"
+            src="/new_age.html"
+            title="Board Explorer chart: Generations"
+            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
+          />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row style={{ minHeight: `1700px` }}>
+        <Grid.Column>
+          <iframe
+            src="/new_race.html"
+            title="Board Explorer chart: Race"
             style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
           />
         </Grid.Column>
         <Grid.Column>
           <iframe
-            src="/infogram_age.html"
-            title="Board Explorer chart: Generations"
+            src="/new_gender.html"
+            title="Board Explorer chart: Gender"
             style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
           />
         </Grid.Column>
