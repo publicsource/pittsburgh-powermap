@@ -34,7 +34,7 @@ const IndexPage = ({ data }) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          <List divided relaxed size='large' style={{ height: `625px`, overflowY: `scroll` }}>
+          <List divided relaxed size='large' style={{ height: `500px`, overflowY: `scroll` }}>
             {readyBoards.map((b, i) => (
               <List.Item key={i}>
                 {b.Done ? 
