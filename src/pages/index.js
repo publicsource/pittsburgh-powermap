@@ -6,6 +6,7 @@ import _ from "lodash"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Callout from "../components/callout"
+import BarChart from "../components/chart"
 
 import be_thumbnail from "../images/board_explorer_home.png"
 
@@ -85,7 +86,10 @@ const IndexPage = ({ data }) => {
             <p>Explore with us, and, if you have a story idea or something you think we should investigate, please <Link to="/contact" style={{ borderBottom: `2px solid #418cff` }}>let us know</Link>.</p>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row style={{ minHeight: `700px` }}>
+      <Grid.Row>
+        <BarChart data={data.chartStats} />
+      </Grid.Row>
+      {/* <Grid.Row style={{ minHeight: `700px` }}>
         <Grid.Column>
           <iframe
             src="/new_age.html"
@@ -109,7 +113,7 @@ const IndexPage = ({ data }) => {
             style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
           />
         </Grid.Column>
-      </Grid.Row>
+      </Grid.Row> */}
       {/* <Responsive as={Grid.Row} {...Responsive.onlyMobile} style={{ minHeight: `1850px` }}>
         <Grid.Column>
           <iframe
@@ -168,6 +172,18 @@ export const query = graphql`
                 Slug
               }
             }
+          }
+        }
+      }
+    }
+    chartStats: allAirtable(filter: {table: {eq: "People"}}) {
+      totalCount
+      edges {
+        node {
+          data {
+            Race
+            Gender
+            Birthdate (formatString: "YYYY")
           }
         }
       }
