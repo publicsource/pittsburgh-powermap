@@ -15,6 +15,12 @@ const BarChart = ({ data }) => {
     });
     let byDecade = _.countBy(dataWithDecades, 'Decade');
 
+    console.log(
+        byRace,
+        bySex,
+        byDecade
+    )
+
     const options = {
         title: {
             text: 'My chart'
