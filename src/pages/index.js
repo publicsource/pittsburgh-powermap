@@ -63,10 +63,10 @@ const IndexPage = ({ data }) => {
               <Item.Content verticalAlign='middle'>
                 <Item.Header as='h3' style={{ fontSize: `1em` }}>
                   <a 
-                    href="https://www.publicsource.org"
+                    href="https://www.publicsource.org/pittsburgh-allegheny-county-boards-commissions-diversity-board-explorer/"
                     target="_blank" 
                     rel="noopener noreferrer">
-                    READ MORE: All on board? Powerful panels are more diverse, but progress is uneven
+                    READ MORE: All on board? Powerful Pittsburgh-area panels are more diverse, but progress is uneven
                   </a>
                 </Item.Header>
               </Item.Content>
