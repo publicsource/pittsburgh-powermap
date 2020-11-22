@@ -27,15 +27,11 @@ const AgeBarChart = ({ data }) => {
             }
         },
         title: {
-            text: '',
+            text: 'By decade born',
+            align: 'left',
             style: {
-                display: 'none'
-            }
-        },
-        subtitle: {
-            text: '',
-            style: {
-                display: 'none'
+                fontWeight: 'bold',
+                fontSize: '1.3em'
             }
         },
         series: [{
@@ -58,7 +54,10 @@ const AgeBarChart = ({ data }) => {
         },
         yAxis: {
             title: {
-                enabled: false
+                text: 'Number of Board Members',
+                style: {
+                    fontSize: '.8em'
+                }
             },
             labels: {
                 enabled: true

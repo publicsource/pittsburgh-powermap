@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Header, List, Label, Item } from "semantic-ui-react"
+import { Grid, Header, List, Label, Item, Form, Checkbox } from "semantic-ui-react"
 import _ from "lodash"
 import { getDecade } from 'date-fns'
 
@@ -29,6 +29,8 @@ const IndexPage = ({ data }) => {
   let orderedCallouts = _.orderBy(callouts, callouts => callouts.Order, 'asc')
 
   // Chart statistics
+  console.log(data.chartStats);
+
   let byRace = _.countBy(data.chartStats.edges, 'node.data.Race');
   let bySex = _.countBy(data.chartStats.edges, 'node.data.Gender');
 
@@ -103,7 +105,39 @@ const IndexPage = ({ data }) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Age: 'I Love Lucy' generation outnumbers 'X-Files' kids</Header>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Who makes up the boards?</Header>
+          {/* <Form 
+            style={{ background: `#d3e3ff`, padding: `.8em`, margin: 0, display: 'flex', flexDirection: 'row', justifyContent: `flex-start`, alignItems: 'center' }}>
+            <Form.Field>View board memberships by board type: </Form.Field>
+            <Form.Field style={{ marginLeft: `1em` }}>
+              <Checkbox
+                label='City'
+                name='checkboxRadioGroup'
+                value='city'
+                checked={true}
+              />
+            </Form.Field>
+            <Form.Field style={{ marginLeft: `1em` }}>
+              <Checkbox
+                label='County' 
+                name='checkboxRadioGroup'
+                value='county'
+                checked={true}
+              />
+            </Form.Field>
+            <Form.Field style={{ marginLeft: `1em` }}>
+              <Checkbox
+                label='Joint' 
+                name='checkboxRadioGroup'
+                value='joint'
+                checked={true}
+              />
+            </Form.Field>
+          </Form> */}
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
           <AgeBarChart data={byDecade} />
         </Grid.Column>
       </Grid.Row>
@@ -115,47 +149,6 @@ const IndexPage = ({ data }) => {
           <GenderPieChart data={bySex} />
         </Grid.Column>
       </Grid.Row>
-      {/* <Grid.Row style={{ minHeight: `700px` }}>
-        <Grid.Column>
-          <iframe
-            src="/new_age.html"
-            title="Board Explorer chart: Generations"
-            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
-          />
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row style={{ minHeight: `1700px` }}>
-        <Grid.Column>
-          <iframe
-            src="/new_race.html"
-            title="Board Explorer chart: Race"
-            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <iframe
-            src="/new_gender.html"
-            title="Board Explorer chart: Gender"
-            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
-          />
-        </Grid.Column>
-      </Grid.Row> */}
-      {/* <Responsive as={Grid.Row} {...Responsive.onlyMobile} style={{ minHeight: `1850px` }}>
-        <Grid.Column>
-          <iframe
-            src="/infogram_diversity.html"
-            title="Board Explorer chart: Race and gender"
-            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <iframe
-            src="/infogram_age.html"
-            title="Board Explorer chart: Generations"
-            style={{ width: `100%`, height: `100%`, scrolling: `no`, overflow: `hidden`, border: `None` }}
-          />
-        </Grid.Column>
-      </Responsive> */}
     </Layout>
   )
 }
@@ -202,7 +195,7 @@ export const query = graphql`
         }
       }
     }
-    chartStats: allAirtable(filter: {table: {eq: "People"}}) {
+    chartStats: allAirtable(filter: {table: {eq: "People"}, data: {Number_of_Active_Positions: {gt: 0}}}) {
       totalCount
       edges {
         node {
@@ -210,6 +203,7 @@ export const query = graphql`
             Race
             Gender
             Birthdate (formatString: "YYYY")
+            Number_of_Active_Positions
           }
         }
       }

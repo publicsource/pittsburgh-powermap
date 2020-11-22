@@ -6,28 +6,32 @@ import addTreemapModule from 'highcharts/modules/treemap'
 const RaceTreemapChart = ({ data }) => {
     addTreemapModule(Highcharts);
 
-    let colors = ['#418cff','#0d1c33','#d941ff','#ff8d41','#ffec41']
+    let colors = {
+        'White': '#418cff',
+        'Black': '#0ds1c33',
+        'Asian': '#d941ff',
+        'Latino': '#ff8d41',
+        'Native American': '#ffec41'
+    }
 
     let formattedData = []
-    Object.keys(data).forEach((key, i) => {
-        formattedData.push({
-            name: key,
-            value: data[key],
-            colorValue: colors[i]
-        })
+    Object.keys(data).forEach((key) => {
+        if (key !== 'null') {
+            formattedData.push({
+                name: key,
+                value: data[key],
+                color: colors[key]
+            })
+        }
     })
 
     const options = {
         title: {
-            text: '',
+            text: 'By race',
+            align: 'left',
             style: {
-                display: 'none'
-            }
-        },
-        subtitle: {
-            text: '',
-            style: {
-                display: 'none'
+                fontWeight: 'bold',
+                fontSize: '1.3em'
             }
         },
         series: [{
@@ -36,13 +40,18 @@ const RaceTreemapChart = ({ data }) => {
             data: formattedData,
         }],
         tooltip: {
-            pointFormat: '{point.value} board members ({point.percentage:.1f}%)'
+            pointFormat: '{point.value} {point.name} board members'
         },
         legend: {
             enabled: false
         },
         credits: {
             enabled: false
+        },
+        chart: {
+            style: {
+                font: 'inherit'
+            }
         }
     }
 

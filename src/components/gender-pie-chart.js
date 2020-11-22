@@ -32,15 +32,11 @@ const GenderPieChart = ({ data }) => {
             }
         },
         title: {
-            text: '',
+            text: 'By gender',
+            align: 'left',
             style: {
-                display: 'none'
-            }
-        },
-        subtitle: {
-            text: '',
-            style: {
-                display: 'none'
+                fontWeight: 'bold',
+                fontSize: '1.3em'
             }
         },
         series: [{
