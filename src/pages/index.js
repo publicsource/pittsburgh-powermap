@@ -2,11 +2,14 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { Grid, Header, List, Label, Item } from "semantic-ui-react"
 import _ from "lodash"
+import { getDecade } from 'date-fns'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Callout from "../components/callout"
-import BarChart from "../components/chart"
+import AgeBarChart from "../components/age-bar-chart"
+import GenderPieChart from "../components/gender-pie-chart"
+import RaceTreemapChart from "../components/race-treemap-chart"
 
 import be_thumbnail from "../images/board_explorer_home.png"
 
@@ -14,14 +17,26 @@ const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
   
+  // List of all boards
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
   let readyBoards = _.filter(orderedBoards, function(o) { 
     return o.Done
     // return o.Done || o.Next; 
   });
 
+  // Callouts
   let callouts = data.callouts.edges.map(e => e.node.data)
   let orderedCallouts = _.orderBy(callouts, callouts => callouts.Order, 'asc')
+
+  // Chart statistics
+  let byRace = _.countBy(data.chartStats.edges, 'node.data.Race');
+  let bySex = _.countBy(data.chartStats.edges, 'node.data.Gender');
+
+  let dataWithDecades = data.chartStats.edges.map(e => {
+      let d = e.node.data;
+      return ({ ...d, 'Decade': getDecade(new Date(d.Birthdate))})
+  });
+  let byDecade = _.countBy(dataWithDecades, 'Decade');
 
   return (
     <Layout>
@@ -87,7 +102,18 @@ const IndexPage = ({ data }) => {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <BarChart data={data.chartStats} />
+        <Grid.Column>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Age: 'I Love Lucy' generation outnumbers 'X-Files' kids</Header>
+          <AgeBarChart data={byDecade} />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          <RaceTreemapChart data={byRace} />
+        </Grid.Column>
+        <Grid.Column>
+          <GenderPieChart data={bySex} />
+        </Grid.Column>
       </Grid.Row>
       {/* <Grid.Row style={{ minHeight: `700px` }}>
         <Grid.Column>
