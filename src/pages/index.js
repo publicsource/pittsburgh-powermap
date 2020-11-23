@@ -29,14 +29,13 @@ const IndexPage = ({ data }) => {
   let orderedCallouts = _.orderBy(callouts, callouts => callouts.Order, 'asc')
 
   // Chart statistics
-  console.log(data.chartStats);
-
-  let byRace = _.countBy(data.chartStats.edges, 'node.data.Race');
-  let bySex = _.countBy(data.chartStats.edges, 'node.data.Gender');
+  let totalActivePositions = data.chartStats.totalCount;
+  let byRace = _.countBy(data.chartStats.edges, 'node.data.Person[0].data.Race');
+  let bySex = _.countBy(data.chartStats.edges, 'node.data.Person[0].data.Gender');
 
   let dataWithDecades = data.chartStats.edges.map(e => {
-      let d = e.node.data;
-      return ({ ...d, 'Decade': getDecade(new Date(d.Birthdate))})
+      let d = e.node.data.Person[0].data;
+      return ({ ...d, 'Decade': d.Birthdate ? getDecade(new Date(d.Birthdate)) : null })
   });
   let byDecade = _.countBy(dataWithDecades, 'Decade');
 
@@ -195,15 +194,19 @@ export const query = graphql`
         }
       }
     }
-    chartStats: allAirtable(filter: {table: {eq: "People"}, data: {Number_of_Active_Positions: {gt: 0}}}) {
+    chartStats: allAirtable(filter: {table: {eq: "Positions"}, data: {Expired: {ne: true}}}) {
       totalCount
       edges {
         node {
           data {
-            Race
-            Gender
-            Birthdate (formatString: "YYYY")
-            Number_of_Active_Positions
+            Position_ID
+            Person {
+              data {
+                Race
+                Gender
+                Birthdate (formatString: "YYYY-MM-DD")
+              }
+            }
           }
         }
       }

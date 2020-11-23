@@ -1,8 +1,11 @@
 import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import _ from 'lodash'
 
 const AgeBarChart = ({ data }) => {
+    let nonNullData = _.omit(data, "null")
+
     const options = {
         chart: {
             type: 'bar',
@@ -35,11 +38,11 @@ const AgeBarChart = ({ data }) => {
             }
         },
         series: [{
-            data: Object.values(data),
+            data: Object.values(nonNullData),
             color: '#418cff'
         }],
         xAxis: {
-            categories: Object.keys(data),
+            categories: Object.keys(nonNullData),
             labels: {
                 enabled: true,
                 formatter: function() {
