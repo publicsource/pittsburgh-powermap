@@ -57,10 +57,7 @@ const AgeBarChart = ({ data }) => {
         },
         yAxis: {
             title: {
-                text: 'Number of Board Members',
-                style: {
-                    fontSize: '.8em'
-                }
+                enabled: false
             },
             labels: {
                 enabled: true

@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Header, List, Label, Item, Form, Checkbox } from "semantic-ui-react"
+import { Grid, Header, List, Label, Item } from "semantic-ui-react"
 import _ from "lodash"
 import { getDecade } from 'date-fns'
 
@@ -12,6 +12,15 @@ import GenderPieChart from "../components/gender-pie-chart"
 import RaceTreemapChart from "../components/race-treemap-chart"
 
 import be_thumbnail from "../images/board_explorer_home.png"
+
+
+const citationStyles = {
+  fontSize: '12px', 
+  font: 'inherit', 
+  color: '#5d5d5d', 
+  textAlign: 'right',
+}
+
 
 const IndexPage = ({ data }) => {
   let boards = data.boards.edges.map(e => e.node.data)
@@ -104,48 +113,35 @@ const IndexPage = ({ data }) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Who makes up the boards?</Header>
-          {/* <Form 
-            style={{ background: `#d3e3ff`, padding: `.8em`, margin: 0, display: 'flex', flexDirection: 'row', justifyContent: `flex-start`, alignItems: 'center' }}>
-            <Form.Field>View board memberships by board type: </Form.Field>
-            <Form.Field style={{ marginLeft: `1em` }}>
-              <Checkbox
-                label='City'
-                name='checkboxRadioGroup'
-                value='city'
-                checked={true}
-              />
-            </Form.Field>
-            <Form.Field style={{ marginLeft: `1em` }}>
-              <Checkbox
-                label='County' 
-                name='checkboxRadioGroup'
-                value='county'
-                checked={true}
-              />
-            </Form.Field>
-            <Form.Field style={{ marginLeft: `1em` }}>
-              <Checkbox
-                label='Joint' 
-                name='checkboxRadioGroup'
-                value='joint'
-                checked={true}
-              />
-            </Form.Field>
-          </Form> */}
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Who serves on the city and county boards?</Header>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
           <AgeBarChart data={byDecade} />
+          <p style={{ ...citationStyles, marginBottom: 0 }}>
+            Note: PublicSource was able to determine the ages of {totalActivePositions - byDecade['null']} of {totalActivePositions} active board members.
+          </p>
+          <p style={citationStyles}>
+            Source: Publicly available information including voter registration records.
+          </p>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
           <RaceTreemapChart data={byRace} />
+          <p style={{ ...citationStyles, marginBottom: 0 }}>
+            Note: PublicSource was able to determine the race or ethnicity of {totalActivePositions - byRace['null']} of {totalActivePositions} active board members.
+          </p>
+          <p style={citationStyles}>
+            Sources: Publicly available records including social media, resumes and records of public appearances.
+          </p>
         </Grid.Column>
         <Grid.Column>
           <GenderPieChart data={bySex} />
+          <p style={citationStyles}>
+            Sources: Voter registration records and social media.
+          </p>
         </Grid.Column>
       </Grid.Row>
     </Layout>
