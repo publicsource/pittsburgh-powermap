@@ -8,7 +8,7 @@ const RaceTreemapChart = ({ data }) => {
 
     let colors = {
         'White': '#418cff',
-        'Black': '#0ds1c33',
+        'Black': '#0d1c33',
         'Asian': '#d941ff',
         'Latino': '#ff8d41',
         'Native American': '#ffec41'

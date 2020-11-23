@@ -16,7 +16,7 @@ import be_thumbnail from "../images/board_explorer_home.png"
 
 const citationStyles = {
   fontSize: '12px', 
-  font: 'inherit', 
+  fontFamily: 'inherit', 
   color: '#5d5d5d', 
   textAlign: 'right',
 }
