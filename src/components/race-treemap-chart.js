@@ -3,9 +3,11 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import addTreemapModule from 'highcharts/modules/treemap'
 
-const RaceTreemapChart = ({ data }) => {
-    addTreemapModule(Highcharts);
+if (typeof Highcharts === 'object') {
+    addTreemapModule(Highcharts)
+}
 
+const RaceTreemapChart = ({ data }) => {
     let colors = {
         'White': '#418cff',
         'Black': '#0d1c33',
