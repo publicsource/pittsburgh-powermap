@@ -89,10 +89,10 @@ const IndexPage = ({ data }) => {
               <Item.Content verticalAlign='middle'>
                 <Item.Header as='h3' style={{ fontSize: `1em` }}>
                   <a 
-                    href="https://www.publicsource.org/who-polices-the-police-in-pittsburgh-and-allegheny-county-a-critical-crossroads-for-civilian-review/"
+                    href="https://www.publicsource.org/pittsburgh-allegheny-county-boards-commissions-diversity-board-explorer/"
                     target="_blank" 
                     rel="noopener noreferrer">
-                    READ MORE: The board charged with reviewing accusations against police
+                    READ MORE: All on board? Powerful Pittsburgh-area panels are more diverse, but progress is uneven
                   </a>
                 </Item.Header>
               </Item.Content>
