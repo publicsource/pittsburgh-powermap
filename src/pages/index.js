@@ -1,32 +1,21 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
-import { Grid, Header, List, Label, Item } from "semantic-ui-react"
+import { Grid, Header, List, Label, Item, Form, Radio } from "semantic-ui-react"
 import _ from "lodash"
-import { getDecade } from 'date-fns'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Callout from "../components/callout"
-import AgeBarChart from "../components/age-bar-chart"
-import GenderPieChart from "../components/gender-pie-chart"
-import RaceTreemapChart from "../components/race-treemap-chart"
+import ChartsWrapper from "../components/charts-wrapper"
 
 import be_thumbnail from "../images/board_explorer_home.png"
 
 
-const citationStyles = {
-  fontSize: '12px', 
-  fontFamily: 'inherit', 
-  color: '#5d5d5d', 
-  textAlign: 'right',
-}
-
-
 const IndexPage = ({ data }) => {
+  // List of all boards
   let boards = data.boards.edges.map(e => e.node.data)
   boards.forEach(b => b.Type = "Board")
   
-  // List of all boards
   let orderedBoards = _.orderBy(boards, [boards => boards.Done, boards => boards.Name], ['asc', 'asc'])
   let readyBoards = _.filter(orderedBoards, function(o) { 
     return o.Done
@@ -37,16 +26,22 @@ const IndexPage = ({ data }) => {
   let callouts = data.callouts.edges.map(e => e.node.data)
   let orderedCallouts = _.orderBy(callouts, callouts => callouts.Order, 'asc')
 
-  // Chart statistics
-  let totalActivePositions = data.chartStats.totalCount;
-  let byRace = _.countBy(data.chartStats.edges, 'node.data.Person[0].data.Race');
-  let bySex = _.countBy(data.chartStats.edges, 'node.data.Person[0].data.Gender');
-
-  let dataWithDecades = data.chartStats.edges.map(e => {
-      let d = e.node.data.Person[0].data;
-      return ({ ...d, 'Decade': d.Birthdate ? getDecade(new Date(d.Birthdate)) : null })
-  });
-  let byDecade = _.countBy(dataWithDecades, 'Decade');
+  // Chart controls
+  let chartOptions = [
+    { 
+      value: "All",
+      label: "All Boards",
+    },
+    {
+      value: "City",
+      label: "CITY"
+    },
+    {
+      value: "County",
+      label: "COUNTY"
+    }
+  ]
+  const [chartFilter, setChartFilter] = useState('All');
 
   return (
     <Layout>
@@ -58,7 +53,9 @@ const IndexPage = ({ data }) => {
           </Header>
         </Grid.Column>
       </Grid.Row>
+
       <Grid.Row>
+        {/* LIST OF ALL BOARDS */}
         <Grid.Column>
           <List divided relaxed size='large' style={{ height: `500px`, overflowY: `scroll` }}>
             {readyBoards.map((b, i) => (
@@ -80,6 +77,7 @@ const IndexPage = ({ data }) => {
             ))}
           </List>
         </Grid.Column>
+        {/* CALLOUTS & READ MORE FEATURE*/}
         <Grid.Column>
           <Item.Group>
             {orderedCallouts.map((c, i) => (
@@ -100,50 +98,47 @@ const IndexPage = ({ data }) => {
           </Item.Group>
         </Grid.Column>
       </Grid.Row>
+
+      {/* ABOUT THIS PROJECT */}
       <Grid.Row>
         <Grid.Column>
           <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>About this project</Header>
-            <p>The Pittsburgh region is run in large part by around 500 unelected members of boards, commissions and other public agencies.</p>
-            <p>Board members usually don’t get headlines. Those go to the mayor, the county executive, council members, controllers and directors. But boards often push for new policies, award contracts and grants, address demands for inclusion and equity, and more.</p>
-            <p>The board structure is more diverse than it was 15 years ago, but gaps remain. It’s time for deeper exploration.</p>
-            <p>PublicSource’s new Board Explorer sheds light on these panels and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
-            <p>We have included 56 county, city and joint boards and commissions. As more panels form and membership changes, we'll periodically update.</p>
-            <p>Explore with us, and, if you have a story idea or something you think we should investigate, please <Link to="/contact" style={{ borderBottom: `2px solid #418cff` }}>let us know</Link>.</p>
+          <p>The Pittsburgh region is run in large part by around 500 unelected members of boards, commissions and other public agencies.</p>
+          <p>Board members usually don’t get headlines. Those go to the mayor, the county executive, council members, controllers and directors. But boards often push for new policies, award contracts and grants, address demands for inclusion and equity, and more.</p>
+          <p>The board structure is more diverse than it was 15 years ago, but gaps remain. It’s time for deeper exploration.</p>
+          <p>PublicSource’s new Board Explorer sheds light on these panels and their roles, providing information about each member and inviting analysis of this important part of the region’s power structure.</p>
+          <p>We have included 56 county, city and joint boards and commissions. As more panels form and membership changes, we'll periodically update.</p>
+          <p>Explore with us, and, if you have a story idea or something you think we should investigate, please <Link to="/contact" style={{ borderBottom: `2px solid #418cff` }}>let us know</Link>.</p>
         </Grid.Column>
       </Grid.Row>
+
+      {/* CHARTS */}
       <Grid.Row>
         <Grid.Column>
           <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Who serves on the city and county boards?</Header>
+          <Form style={{ background: `#d3e3ff`, padding: `1em` }}>
+            <Header as='h4'>Filter the charts by jurisdiction:</Header>
+            {chartOptions.map((c,i) => (
+              <Form.Field inline key={i}>
+                <Radio
+                  label={{ 
+                    children: c.value !== 'All' ? 
+                      <>
+                        <Label color={c.value === 'City' ? 'orange' : 'yellow'}>{c.label}</Label>
+                        <span> (incl. joint boards)</span>
+                      </> : c.label
+                  }}
+                  name='radioGroup'
+                  value={c.value}
+                  checked={chartFilter === c.value}
+                  onChange={() => setChartFilter(c.value)}
+                />
+              </Form.Field>
+            ))}
+          </Form>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          <AgeBarChart data={byDecade} />
-          <p style={{ ...citationStyles, marginBottom: 0 }}>
-            Note: PublicSource was able to determine the ages of {totalActivePositions - byDecade['null']} of {totalActivePositions} active board members.
-          </p>
-          <p style={citationStyles}>
-            Source: Publicly available information including voter registration records.
-          </p>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          <RaceTreemapChart data={byRace} />
-          <p style={{ ...citationStyles, marginBottom: 0 }}>
-            Note: PublicSource was able to determine the race or ethnicity of {totalActivePositions - byRace['null']} of {totalActivePositions} active board members.
-          </p>
-          <p style={citationStyles}>
-            Sources: Publicly available records including social media, resumes and records of public appearances.
-          </p>
-        </Grid.Column>
-        <Grid.Column>
-          <GenderPieChart data={bySex} />
-          <p style={citationStyles}>
-            Sources: Voter registration records and social media.
-          </p>
-        </Grid.Column>
-      </Grid.Row>
+      <ChartsWrapper filter={chartFilter} />
     </Layout>
   )
 }
@@ -184,23 +179,6 @@ export const query = graphql`
               data {
                 Name
                 Slug
-              }
-            }
-          }
-        }
-      }
-    }
-    chartStats: allAirtable(filter: {table: {eq: "Positions"}, data: {Expired: {ne: true}}}) {
-      totalCount
-      edges {
-        node {
-          data {
-            Position_ID
-            Person {
-              data {
-                Race
-                Gender
-                Birthdate (formatString: "YYYY-MM-DD")
               }
             }
           }

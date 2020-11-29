@@ -2,7 +2,7 @@ import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-const GenderPieChart = ({ data }) => {
+const GenderPieChart = ({ data, filter }) => {
     let formattedData = []
     Object.keys(data).forEach(key => {
         formattedData.push({
@@ -32,7 +32,7 @@ const GenderPieChart = ({ data }) => {
             }
         },
         title: {
-            text: 'By gender',
+            text: filter + ' board members by gender',
             align: 'left',
             style: {
                 fontWeight: 'bold',

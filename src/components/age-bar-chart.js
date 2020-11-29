@@ -3,7 +3,7 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import _ from 'lodash'
 
-const AgeBarChart = ({ data }) => {
+const AgeBarChart = ({ data, filter }) => {
     let nonNullData = _.omit(data, "null")
 
     const options = {
@@ -30,7 +30,7 @@ const AgeBarChart = ({ data }) => {
             }
         },
         title: {
-            text: 'By decade born',
+            text: filter + ' board members by decade born',
             align: 'left',
             style: {
                 fontWeight: 'bold',

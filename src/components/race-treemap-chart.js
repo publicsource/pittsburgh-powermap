@@ -7,7 +7,7 @@ if (typeof Highcharts === 'object') {
     addTreemapModule(Highcharts)
 }
 
-const RaceTreemapChart = ({ data }) => {
+const RaceTreemapChart = ({ data, filter }) => {
     let colors = {
         'White': '#418cff',
         'Black': '#0d1c33',
@@ -29,7 +29,7 @@ const RaceTreemapChart = ({ data }) => {
 
     const options = {
         title: {
-            text: 'By race',
+            text: filter + ' board members by race',
             align: 'left',
             style: {
                 fontWeight: 'bold',
