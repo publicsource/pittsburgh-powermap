@@ -66,7 +66,8 @@ const AgeBarChart = ({ data, filter }) => {
         tooltip: {
             formatter: function() {
                 return this.y + ' board members born in the ' + this.x + 's';
-            }
+            },
+            shadow: false
         },
         legend: {
             enabled: false

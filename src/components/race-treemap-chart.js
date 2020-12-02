@@ -2,6 +2,7 @@ import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import addTreemapModule from 'highcharts/modules/treemap'
+import _ from 'lodash'
 
 if (typeof Highcharts === 'object') {
     addTreemapModule(Highcharts)
@@ -11,17 +12,20 @@ const RaceTreemapChart = ({ data, filter }) => {
     let colors = {
         'White': '#418cff',
         'Black': '#0d1c33',
-        'Asian': '#d941ff',
-        'Latino': '#ff8d41',
-        'Native American': '#ffec41'
+        'Asian': '#d173e8',
+        'Latino': '#ff755e',
+        'Native American': '#ffa600'
     }
 
     let formattedData = []
+    let denominator = _.sum(_.values(data))
+
     Object.keys(data).forEach((key) => {
         if (key !== 'null') {
             formattedData.push({
                 name: key,
                 value: data[key],
+                percent: ((data[key] / denominator) * 100).toFixed(1),
                 color: colors[key]
             })
         }
@@ -39,10 +43,11 @@ const RaceTreemapChart = ({ data, filter }) => {
         series: [{
             type: 'treemap',
             layoutAlgorithm: 'squarified',
-            data: formattedData,
+            data: formattedData
         }],
         tooltip: {
-            pointFormat: '{point.value} {point.name} board members'
+            pointFormat: '{point.value} {point.name} board members ({point.percent}%)',
+            shadow: false
         },
         legend: {
             enabled: false
@@ -53,6 +58,17 @@ const RaceTreemapChart = ({ data, filter }) => {
         chart: {
             style: {
                 font: 'inherit'
+            }
+        },
+        plotOptions: {
+            treemap: {
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        textOutline: 'none',
+                        fontSize: '14px'
+                    }
+                }
             }
         }
     }

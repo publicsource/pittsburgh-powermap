@@ -26,7 +26,8 @@ const GenderPieChart = ({ data, filter }) => {
                     format: '{point.name} {point.percentage:.1f}%',
                     color: '#000',
                     style: { 
-                        textOutline: 'none'
+                        textOutline: 'none',
+                        fontSize: '14px'
                     }
                 }
             }
@@ -42,10 +43,11 @@ const GenderPieChart = ({ data, filter }) => {
         series: [{
             data: formattedData,
             colorByPoint: true,
-            colors: ['#d941ff', '#418cff', '#ffec41']
+            colors: ['#418cff', '#d173e8', '#ffa600']
         }],
         tooltip: {
-            pointFormat: '{point.y} board members ({point.percentage:.1f}%)'
+            pointFormat: '{point.y} board members ({point.percentage:.1f}%)',
+            shadow: false
         },
         legend: {
             enabled: false
