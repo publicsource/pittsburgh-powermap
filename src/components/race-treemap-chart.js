@@ -33,7 +33,7 @@ const RaceTreemapChart = ({ data, filter }) => {
 
     const options = {
         title: {
-            text: filter + ' board members by race',
+            text: `Race or ethnicity, ${_.lowerCase(filter)} board members`,
             align: 'left',
             style: {
                 fontWeight: 'bold',

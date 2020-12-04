@@ -30,7 +30,7 @@ const AgeBarChart = ({ data, filter }) => {
             }
         },
         title: {
-            text: filter + ' board members by decade born',
+            text: `Decade of birth, ${_.lowerCase(filter)} board members`,
             align: 'left',
             style: {
                 fontWeight: 'bold',

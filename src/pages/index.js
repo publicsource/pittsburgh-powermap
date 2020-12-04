@@ -30,7 +30,7 @@ const IndexPage = ({ data }) => {
   let chartOptions = [
     { 
       value: "All",
-      label: "All Boards",
+      label: "All active board members",
     },
     {
       value: "City",
@@ -39,6 +39,10 @@ const IndexPage = ({ data }) => {
     {
       value: "County",
       label: "COUNTY"
+    },
+    {
+      value: "Joint",
+      label: "Joint CITY COUNTY"
     }
   ]
   const [chartFilter, setChartFilter] = useState('All');
@@ -115,18 +119,18 @@ const IndexPage = ({ data }) => {
       {/* CHARTS */}
       <Grid.Row>
         <Grid.Column>
-          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>Who serves on the city and county boards?</Header>
+          <Header as='h2' style={{ borderBottom: `5px solid #418cff`, width: `100%` }}>
+            How diverse are the city and county boards and commissions?
+          </Header>
           <Form style={{ background: `#d3e3ff`, padding: `1em` }}>
             <Header as='h4'>Filter the charts by jurisdiction:</Header>
             {chartOptions.map((c,i) => (
               <Form.Field inline key={i}>
                 <Radio
                   label={{ 
-                    children: c.value !== 'All' ? 
-                      <>
-                        <Label color={c.value === 'City' ? 'orange' : 'yellow'}>{c.label}</Label>
-                        <span> (incl. joint boards)</span>
-                      </> : c.label
+                    children: c.value === 'All' ? c.label 
+                      : c.value === "Joint" ? <>Joint <Label color='orange'>CITY</Label> <Label color='yellow'>COUNTY</Label></> 
+                      : <><Label color={c.value === 'City' ? 'orange' : 'yellow'}>{c.label}</Label></>
                   }}
                   name='radioGroup'
                   value={c.value}

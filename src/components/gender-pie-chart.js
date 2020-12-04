@@ -1,6 +1,7 @@
 import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import _ from 'lodash'
 
 const GenderPieChart = ({ data, filter }) => {
     let formattedData = []
@@ -33,7 +34,7 @@ const GenderPieChart = ({ data, filter }) => {
             }
         },
         title: {
-            text: filter + ' board members by gender',
+            text: `Gender, ${_.lowerCase(filter)} board members`,
             align: 'left',
             style: {
                 fontWeight: 'bold',

@@ -30,7 +30,7 @@ const ChartsWrapper = ({ filter }) => {
             Position_ID
             Board {
               data {
-                Govt_Level
+                Govt_Level_Charts
               }
             }
             Person {
@@ -44,7 +44,7 @@ const ChartsWrapper = ({ filter }) => {
         }
       }
     }
-    }
+  }
   `)
 
   // Filter by juridiction based on form input
@@ -52,7 +52,7 @@ const ChartsWrapper = ({ filter }) => {
 
   if (filter !== 'All') {
     filteredChartData = _.filter(data.chartStats.edges, function(e) {
-      return e.node.data.Board[0].data.Govt_Level.includes(`${filter}`)
+      return e.node.data.Board[0].data.Govt_Level_Charts === `${filter}`
     })
   }
 
