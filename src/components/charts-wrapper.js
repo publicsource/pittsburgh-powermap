@@ -84,16 +84,19 @@ const ChartsWrapper = ({ filter }) => {
         <Grid.Column>
             <RaceTreemapChart data={byRace} filter={filter} />
             <p style={{ ...citationStyles, marginBottom: 0 }}>
-            Note: PublicSource was able to determine the race or ethnicity of {totalActivePositions - byRace['null']} of {totalActivePositions} active board members.
+              Note: PublicSource was able to determine the race or ethnicity of {totalActivePositions - byRace['null']} of {totalActivePositions} active board members.
             </p>
             <p style={citationStyles}>
-            Sources: Publicly available records including social media, resumes and records of public appearances.
+              Sources: Publicly available records including social media, resumes and records of public appearances.
             </p>
         </Grid.Column>
         <Grid.Column>
             <GenderPieChart data={bySex} filter={filter} />
+            <p style={{ ...citationStyles, marginBottom: 0 }}>
+              Note: PublicSource was able to determine the gender of {bySex['null'] ? `${totalActivePositions - bySex['null']} of` : 'all'} {totalActivePositions} active board members.
+            </p>
             <p style={citationStyles}>
-            Sources: Voter registration records and social media.
+              Sources: Voter registration records and social media.
             </p>
         </Grid.Column>
       </Grid.Row>
