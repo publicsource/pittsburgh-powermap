@@ -11,10 +11,10 @@ if (typeof Highcharts === 'object') {
 const RaceTreemapChart = ({ data, filter }) => {
     let colors = {
         'White': '#418cff',
-        'Black': '#0d1c33',
-        'Asian': '#d173e8',
-        'Latino': '#ff755e',
-        'Native American': '#ffa600'
+        'Black': '#b1cfd5',
+        'Asian': '#fb6927',
+        'Latino': '#ffb241',
+        'Native American': '#0d1c33'
     }
 
     let formattedData = []
@@ -64,6 +64,8 @@ const RaceTreemapChart = ({ data, filter }) => {
             treemap: {
                 dataLabels: {
                     enabled: true,
+                    format: '{point.name}',
+                    color: '#000',
                     style: {
                         textOutline: 'none',
                         fontSize: '14px'

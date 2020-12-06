@@ -8,7 +8,10 @@ const GenderPieChart = ({ data, filter }) => {
     Object.keys(data).forEach(key => {
         formattedData.push({
             name: key,
-            y: data[key]
+            y: data[key],
+            dataLabels: {
+                distance: data[key] < 5 ? 30 : -60
+            }
         })
     })
 
@@ -24,12 +27,13 @@ const GenderPieChart = ({ data, filter }) => {
                 allowPointSelect: false,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name} {point.percentage:.1f}%',
+                    format: '{point.name}',
+                    // format: '{point.name}<br/>{point.percentage:.1f}%',
                     color: '#000',
                     style: { 
                         textOutline: 'none',
                         fontSize: '14px'
-                    }
+                    },
                 }
             }
         },
@@ -44,7 +48,7 @@ const GenderPieChart = ({ data, filter }) => {
         series: [{
             data: formattedData,
             colorByPoint: true,
-            colors: ['#418cff', '#d173e8', '#ffa600']
+            colors: ['#418cff', '#b1cfd5', '#fb6927']
         }],
         tooltip: {
             pointFormat: '{point.y} board members ({point.percentage:.1f}%)',
