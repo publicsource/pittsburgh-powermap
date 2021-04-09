@@ -16,7 +16,7 @@ const AboutPage = () => (
       <p>Explore the region's key boards with us.</p>
       <h3>Note on sourcing</h3>
       <p>The information in Board Explorer is drawn from public records, including governing body agendas and minutes, property ownership data, voter registration rolls, court records, authority and business websites and board members’ social media, gathered over the course of 2020.</p>
-      <p>Board Explorer data was collected and checked by James Bell, Nicole C. Brambila, Sophie Burkholder, Emma Folts, Amanda Hernandez, Jourdan Hicks, TyLisa C. Johnson, Veonna King, Rich Lord, Oliver Morrison, Jon Moss, Mitra Nourbakhsh, Juliette Rihl, Kellen Stepler and Amanda Su. Photos by Jay Manning.</p>
+      <p>Board Explorer data was collected and checked by James Bell, Nicole C. Brambila, Sophie Burkholder, Emma Folts, Amanda Hernandez, Jourdan Hicks, TyLisa C. Johnson, Veonna King, Rich Lord, Oliver Morrison, Jon Moss, Mitra Nourbakhsh, Juliette Rihl, Kellen Stepler, Amanda Su, Danielle Cruz and Punya Bhasin. Photos by Jay Manning.</p>
       <p>PublicSource periodically updates Board Explorer to address outdated, incomplete or inaccurate information.</p> 
       <p>If anything in Board Explorer is not currently accurate, please email <a style={{ borderBottom: `2px solid #418cff` }} href="mailto:rich@publicsource.org">rich@publicsource.org</a>.</p>
     </Grid.Row>
