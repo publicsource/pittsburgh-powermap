@@ -20,6 +20,13 @@ export default ({ data }) => {
     ['asc', 'asc']
   )
 
+  let stories = board.Stories;
+  let orderedStories = _.orderBy(
+    stories,
+    [stories => new Date(stories.data.Date)],
+    ['desc']
+  )
+
   return (
     <Layout>
       <SEO title={`${board.Name}`} thumbnail={be_thumbnail} />
@@ -90,12 +97,12 @@ export default ({ data }) => {
           ) : null}
         </Grid.Column>
       </Grid.Row>
-      {board.Stories ? 
+      {orderedStories && orderedStories.length > 0 ? 
         <Grid.Row style={{ display: `flex`, flexDirection: `column`, marginTop: `1em` }}>
           <Grid.Column>
             <Header as='h2'>Stories</Header>
             <Card.Group>
-              {board.Stories.map((s, i) => (
+              {orderedStories.map((s, i) => (
                 <Card key={i} fluid style={{ borderLeft: `5px solid #418cff` }}>
                   <Card.Content>
                     <Card.Header as='h5' style={{ marginBottom: 0 }}>
