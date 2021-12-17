@@ -85,7 +85,7 @@ const IndexPage = ({ data }) => {
         <Grid.Column>
           <Item.Group>
             {orderedCallouts.map((c, i) => (
-              <Callout d={c} index={i} />
+              <Callout d={c} index={i} key={i} />
             ))}
             <Item key='read-more' style={{ background: `#d3e3ff`, padding: `.8em` }}>
               <Item.Content verticalAlign='middle'>
