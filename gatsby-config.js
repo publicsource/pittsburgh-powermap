@@ -80,6 +80,13 @@ module.exports = {
         trackingId: `UA-24107680-1`
       }
     },
+    {
+      resolve: `gatsby-plugin-parsely-analytics`,
+      options: {
+        apikey: `publicsource.org`,
+        enableInDevelopment: false // send page views when NODE_ENV !== prod
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

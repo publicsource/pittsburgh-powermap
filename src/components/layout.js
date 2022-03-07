@@ -43,7 +43,6 @@ const Layout = ({ children }) => (
       }}>
         <span>© Copyright 2020, PublicSource</span>
     </footer>
-    <script id="parsely-cfg" src="//cdn.parsely.com/keys/publicsource.org/p.js"></script>
   </>
 )
 
