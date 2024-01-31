@@ -26,7 +26,7 @@ Then you can navigate to your pull request where Netlify will automatically gene
 Requires [Node](https://nodejs.org/en/download/) (> version 10.3), [Yarn](https://classic.yarnpkg.com/en/docs/install), and [Gatsby Client](https://www.gatsbyjs.com/docs/quick-start/) to be installed globally.
 
 Clone this repository, then:
-- Copy `.env.example` to `.env.development` & `.env.production` and add your secret key (find it in Airtable >> Account overview)
+- Copy `.env.example` to `.env.development` & `.env.production` and add an Airtable Personal Access Token with read permissions to your base
 - Run `yarn` to install dependencies
 - Run `gatsby develop` to start the development server at `localhost:8000` and GraphiQL, an in-browser IDE, to explore our site's data at `http://localhost:8000/___graphql` (especially useful for testing how to query the Airtable schema)
 
