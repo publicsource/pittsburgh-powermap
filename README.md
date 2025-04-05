@@ -1,5 +1,7 @@
 # Board Explorer
 
+**THIS REPOSITORY IS ARCHIVED ! Please see https://github.com/publicsource/board-explorer-reboot for our latest iteration.**
+
 Board Explore is a tool from PublicSource to navigate Pittsburgh's unelected power structures. It's powered by a dataset of public authorities and the people that serve on them. Find it at https://boards.publicsource.org/
 
 Board Explorer is built with [GatsbyJS](https://www.gatsbyjs.com/), a static-site generator for React & GraphQL. [Semantic UI React](https://react.semantic-ui.com/) components are used for responsive page layouts and styling. Data is managed in [Airtable](https://airtable.com/), and connected using the [gatsby-source-airtable](https://www.gatsbyjs.com/plugins/gatsby-source-airtable/) plugin. The site is deployed using [Netlify](https://www.gatsbyjs.com/docs/deploying-to-netlify/).
